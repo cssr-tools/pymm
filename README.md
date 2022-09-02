@@ -44,7 +44,7 @@ Run `pymm --help` to see all possible command line argument options. Inside the 
 See documentation/report.pdf.
 
 ## Examples
-All the numerical simulations included in the below two publications can be found in the examples folder. 
+All the numerical simulations included in the below publication can be found in the examples folder. 
 
 ## Citing
 If you use _pymm_ in your research, please cite the following publication:
