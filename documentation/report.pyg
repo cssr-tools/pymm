@@ -1,0 +1,1 @@
+pymm -i some_input_image.png -p some_input_parameters.txt -o some_output_folder

@@ -1,0 +1,12 @@
+include README.md
+include LICENSE
+include src/pymm/core/*
+include src/pymm/templates/grid/*
+include src/pymm/templates/OpenFOAM/flowStokes/0/*
+include src/pymm/templates/OpenFOAM/flowStokes/constant/*
+include src/pymm/templates/OpenFOAM/flowStokes/system/*
+include src/pymm/templates/OpenFOAM/tracerTransport/0/*
+include src/pymm/templates/OpenFOAM/tracerTransport/constant/*
+include src/pymm/templates/OpenFOAM/tracerTransport/system/*
+include src/pymm/templates/OpenFOAM/tracerTransport/inlet.mako
+include src/pymm/templates/utils/*

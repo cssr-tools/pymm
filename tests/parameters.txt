@@ -1,0 +1,21 @@
+"""Set the framework parameters"""
+6.74e-3     #Image-related, length of the microsystem [m]
+2.5e-3      #Image-related, height of the microsystem [m]
+0.03e-3     #Image-related, depth of the microsystem [m]
+160         #Image-related, threshold for converting the image to binary
+1.0         #Image-related, rescaled factor for the input image
+100         #Image-related, minimum size of the grain clusters
+0.8         #Image-related, tolerance to approximate the border as polygon
+0.8         #Image-related, tolerance to approximate the grains as polygon
+1.0         #Figure-related, line width to show the contours in the produced figures
+0.2e-3      #Device-related, width of the top and bottom channels in the micromodel device [m]
+8e-6        #Mesh-related, mesh size [m]
+1e-6        #Fluid-related, kinematic viscosity [Dynamic viscosity/fluid_density, m2/s]
+1e-12       #Tracer-related, diffusion coefficient [m2/s]
+5.0e-4      #Simulation-related, inlet boundary condition (Pressure/fluid_density, [Pa/(kg/m3)])
+25.0        #Simulation-related, end time for the tracer simulation [s]
+1.0         #Simulation-related, time interval to write the tracer results [s]
+1e-7        #Solver-related, convergence criterium for the pressure solution in the numerical scheme for the Stokes simulation
+1e-8        #Solver-related, convergence criterium for the velocity solution in the numerical scheme for the Stokes simulation
+10000       #Solver-related, maximum number of iterations for the Stokes simulation in case the convergence criteria have not been reached
+1.0         #Solver-related, time step in the numerical scheme for the Tracer simulation [s]
