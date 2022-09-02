@@ -55,7 +55,7 @@ def pymm():
     parser.add_argument(
         "-g",
         "--gmsh",
-        default="/home/AD.NORCERESEARCH.NO/dmar/Github/gmsh/build/gmsh",
+        default="gmsh",
         help="The full path to the gmsh executable or simple Gmsh if it runs from the terminal ('gmsh' by default).",
     )
     parser.parse_args()
