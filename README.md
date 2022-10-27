@@ -39,7 +39,7 @@ pymm -i some_input_image.png -p some_input_parameters.txt -o some_output_folder
 Run `pymm --help` to see all possible command line argument options. Inside the `some_input_parameters.txt` file you provide the framework parameters such as the dimensions of the microsystem, mesh size, inlet pressure, and more. See the .txt files in the examples folder.
 
 ## Getting started
-See the docs folder.
+See the [_documentation_](https://daavid00.github.io/pymm/introduction.html).
 
 ## Examples
 All the numerical simulations included in the below publication can be found in the examples folder. 
