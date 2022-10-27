@@ -27,7 +27,7 @@ boundaryField
     inlet
     {
         type            fixedValue;
-        value           uniform ${bc_inlet};   
+        value           uniform ${dic['bc_inlet']};   
     }
     outlet
     {

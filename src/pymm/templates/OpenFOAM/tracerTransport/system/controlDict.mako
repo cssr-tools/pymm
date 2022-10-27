@@ -22,13 +22,13 @@ startTime       0;
 
 stopAt          endTime;
 
-endTime         ${t_et};
+endTime         ${dic['t_et']};
 
-deltaT          ${t_dt};
+deltaT          ${dic['t_dt']};
 
 writeControl    runTime;
 
-writeInterval   ${t_wi};
+writeInterval   ${dic['t_wi']};
 
 purgeWrite      0;
 
