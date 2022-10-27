@@ -5,7 +5,7 @@
 
 # pymm: An open-source image-based framework for CFD in microsystems 
 
-<img src="docs/_static/pymm.gif" width="830" height="700">
+<img src="docsrc/_static/pymm.gif" width="830" height="700">
 
 This repository provides a workflow to perform computational fluid dynamics (CFD) simulations in microsystems. Given an image of a microsystem and an input text file with few parameters, then the _pymm_ executable process the image and builds the grid using [_Gmsh_](https://gmsh.info) and runs the CFD simulations using [_OpenFOAM_](https://www.openfoam.com).
 
