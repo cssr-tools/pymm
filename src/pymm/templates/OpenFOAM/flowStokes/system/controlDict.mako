@@ -23,13 +23,13 @@ startTime       0;
 
 stopAt          endTime;
 
-endTime         ${f_maxI};
+endTime         ${dic['f_maxI']};
 
 deltaT          1;
 
 writeControl    timeStep;
 
-writeInterval   ${f_maxI};
+writeInterval   ${dic['f_maxI']};
 
 purgeWrite      0;
 

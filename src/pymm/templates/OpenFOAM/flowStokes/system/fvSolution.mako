@@ -40,8 +40,8 @@ SIMPLE
     consistent  yes;
     residualControl
     {
-        p               ${p_tol};
-        U               ${u_tol};
+        p               ${dic['p_tol']};
+        U               ${dic['u_tol']};
     }
 }
 

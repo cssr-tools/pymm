@@ -1,12 +1,12 @@
-% for i in range(l1):
-${lol[i][:-1]}
+% for i in range(dic['l1']):
+${dic['geo'][i][:-1]}
 % endfor
 
-% if len(p)>0:
+% if len(dic['p'])>0:
 Tp[] = Point "*";
-h(${ng}) = hs;
-% for i in range(len(p)):
-Point(#Tp[]+${i+1}) = {(rL/L)*${p[i][0]}, ${p[i][1]}*rH/H, 0, h(${ng})};
+h(${dic['ng']}) = hs;
+% for i in range(len(dic['p'])):
+Point(#Tp[]+${i+1}) = {(rL/L)*${dic['p'][i][0]}, ${dic['p'][i][1]}*rH/H, 0, h(${dic['ng']})};
 % endfor
 
 Tp1[] = Point "*";
@@ -19,7 +19,7 @@ Line Loop(1+n+1)={#Tp[]+1: #Tp1[]};
 n = n+1;
 
 % endif
-% for j in range(l1,lf):
-${lol[j][:-1]}
+% for j in range(dic['l1'],dic['lf']):
+${dic['geo'][j][:-1]}
 % endfor
-${lol[lf]}
+${dic['geo'][dic['lf']]}
