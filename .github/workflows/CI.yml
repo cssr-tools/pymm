@@ -7,7 +7,7 @@ on:
  pull_request:
    
 jobs:
-  run-pyff-local:
+  run-pymm-local:
     timeout-minutes: 30
     strategy:
       fail-fast: false
@@ -32,7 +32,7 @@ jobs:
         sudo apt-get update
         sudo apt-get -y install gmsh
         
-   - name: Install test dependecies
+    - name: Install test dependecies
       run: |
         pip install --upgrade pip setuptools wheel
         pip install -r dev-requirements.txt
@@ -41,7 +41,7 @@ jobs:
       run: |
         pip install .
 
-     - name: Check code style and linting 
+    - name: Check code style and linting 
       run: |
         black --check src/ tests/ setup.py
         pylint src/ tests/ setup.py
