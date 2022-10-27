@@ -45,6 +45,6 @@ See the [_documentation_](https://daavid00.github.io/pymm/introduction.html).
 All the numerical simulations included in the below publication can be found in the examples folder. 
 
 ## Citing
-If you use _pymm_ in your research, please cite the following publication:
+If you use _pymm_ in your research, please cite the following publication: 
 
 Liu, N., Haugen, M., Benali, B., Landa-Marbán, D., Fernø, M.A., Pore-scale spatiotemporal dynamics of microbial-induced calcium carbonate growth and distribution in porous media. Submitted.
