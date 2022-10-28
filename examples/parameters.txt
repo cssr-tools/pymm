@@ -14,7 +14,7 @@
 1e-12       #Tracer-related, diffusion coefficient [m2/s]
 5.0e-4      #Simulation-related, inlet boundary condition (Pressure/fluid_density, [Pa/(kg/m3)])
 120.0       #Simulation-related, end time for the tracer simulation [s]
-0.1         #Simulation-related, time interval to write the tracer results [s]
+1.0         #Simulation-related, time interval to write the tracer results [s]
 1e-7        #Solver-related, convergence criterium for the pressure solution in the numerical scheme for the Stokes simulation
 1e-8        #Solver-related, convergence criterium for the velocity solution in the numerical scheme for the Stokes simulation
 10000       #Solver-related, maximum number of iterations for the Stokes simulation in case the convergence criteria have not been reached
