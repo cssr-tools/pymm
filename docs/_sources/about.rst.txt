@@ -3,6 +3,7 @@ About pymm
 ==========
 
 .. image:: ./figs/pymm_logo.png
+    :scale: 35%
 
 The image-based Python package for computational fluid dynamics **pymm** was funded by 
 NORCE Norwegian Research Centre As [project number 101070]. 
