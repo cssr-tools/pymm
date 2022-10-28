@@ -28,3 +28,4 @@ html_theme_options = {
     "logo_only": True,
     "style_nav_header_background": "#aaaaaa",
 }
+html_static_path = ["_static"]
