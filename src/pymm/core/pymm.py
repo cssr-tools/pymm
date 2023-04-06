@@ -5,6 +5,7 @@ import glob
 import argparse
 import numpy as np
 import porespy as ps
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 from skimage import io, measure
 from skimage.transform import rescale
@@ -183,7 +184,7 @@ def process_image(dic, in_image):
     fig, axis = plt.subplots(figsize=(4, 4))
     axis.imshow(
         dic["im"][dic["ad_bord"] : -dic["ad_bord"], dic["ad_bord"] : -dic["ad_bord"]],
-        cmap=plt.cm.gray,
+        cmap=mpl.colormaps["gray"],
     )
     fig.savefig(f"{dic['cwd']}/{dic['fol']}/binary_image.png", dpi=600)
 
@@ -219,7 +220,7 @@ def make_figures(dic):
     # Save the extracted border for visualization
     ps.visualization.set_mpl_style()
     fig, axis = plt.subplots()
-    axis.imshow(dic["border"], cmap=plt.cm.gray)
+    axis.imshow(dic["border"], cmap=mpl.colormaps["gray"])
     lmax = 0
     for contour in dic["cn_border"]:
         contour = measure.approximate_polygon(contour, tolerance=dic["tol_border"])
@@ -240,7 +241,7 @@ def make_figures(dic):
     fig, axis = plt.subplots()
     axis.imshow(
         dic["im"][dic["ad_bord"] : -dic["ad_bord"], dic["ad_bord"] : -dic["ad_bord"]],
-        cmap=plt.cm.gray,
+        cmap=mpl.colormaps["gray"],
     )
     lmax = 0
     for contour in dic["cn_grains"]:
@@ -256,7 +257,7 @@ def make_figures(dic):
     fig, axis = plt.subplots()
     axis.imshow(
         dic["im"][dic["ad_bord"] : -dic["ad_bord"], dic["ad_bord"] : -dic["ad_bord"]],
-        cmap=plt.cm.gray,
+        cmap=mpl.colormaps["gray"],
     )
     axis.plot(
         dic["bnd"][:, 1] - dic["ad_bord"],

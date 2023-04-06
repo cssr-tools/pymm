@@ -47,4 +47,4 @@ All the numerical simulations included in the below publication can be found in 
 ## Citing
 If you use _pymm_ in your research, please cite the following publication: 
 
-Liu, N., Haugen, M., Benali, B., Landa-Marbán, D., Fernø, M.A., Pore-scale spatiotemporal dynamics of microbial-induced calcium carbonate growth and distribution in porous media. Submitted. https://dx.doi.org/10.2139/ssrn.4267919
+Liu, N., Haugen, M., Benali, B., Landa-Marbán, D., Fernø, M.A., 2023. Pore-scale spatiotemporal dynamics of microbial-induced calcium carbonate growth and distribution in porous media.  Int. J. Greenh. Gas Control 125, 103885. https://doi.org/10.1016/j.ijggc.2023.103885
