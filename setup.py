@@ -13,7 +13,7 @@ with open("dev-requirements.txt", "r", encoding="utf8") as file:
 
 setup(
     name="pymm",
-    version="0.0.1",
+    version="2023.10",
     install_requires=install_requires,
     extras_require={"dev": dev_requires},
     setup_requires=["setuptools_scm"],

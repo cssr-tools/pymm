@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Online &mdash; pymm  documentation</title>
@@ -11,12 +11,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -28,12 +27,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: #aaaaaa" >
-            <a href="index.html">
-            <img src="_static/pymm_logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/pymm_logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -45,6 +48,7 @@
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">pymm Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="output_folder.html">Output folder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="related.html">Related</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About pymm</a></li>
 </ul>
 
@@ -61,8 +65,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Online</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Online</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/online.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -73,7 +77,7 @@
            <div itemprop="articleBody">
              
   <section id="online">
-<h1>Online<a class="headerlink" href="#online" title="Permalink to this heading"></a></h1>
+<h1>Online<a class="headerlink" href="#online" title="Link to this heading"></a></h1>
 <p>In this example we consider a micromodel available online in Fig. 2a in
 <a class="reference external" href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2007WR006641">Joekar-Niasar et al. 2009</a>.</p>
 <p>The image was extracted by screenshot and saved with the name ‘online.png’ (1068x1068 pixels).
@@ -104,7 +108,7 @@ The configuration file was saved as ‘configuration.txt’ and contained the fo
 <p>Here we used a version of Gmsh built from source, then we gave the path to the executable via the ‘-g’ flag.
 Since we are interested in the flow and tracer simulations, then we add the flag ‘-t all’.
 Then, the following command was exectued in the terminal:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pymm -i online.png -p configuration.txt -m device -t all -gmsh /home/AD.NORCERESEARCH.NO/dmar/Github/gmsh/build/gmsh
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pymm<span class="w"> </span>-i<span class="w"> </span>online.png<span class="w"> </span>-p<span class="w"> </span>configuration.txt<span class="w"> </span>-m<span class="w"> </span>device<span class="w"> </span>-t<span class="w"> </span>all<span class="w"> </span>-gmsh<span class="w"> </span>/home/AD.NORCERESEARCH.NO/dmar/Github/gmsh/build/gmsh
 </pre></div>
 </div>
 <p>The execution time was ca. 15 minutes and the following are screenshots of the simulation results:</p>
@@ -117,7 +121,7 @@ Then, the following command was exectued in the terminal:</p>
 <figure class="align-default" id="id1">
 <img alt="_images/online_tracer.png" src="_images/online_tracer.png" />
 <figcaption>
-<p><span class="caption-text">Simulation results of the (top) pressure, (middle) velocity, and (bottom) tracer concentration.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Simulation results of the (top) pressure, (middle) velocity, and (bottom) tracer concentration.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -130,7 +134,7 @@ Then, the following command was exectued in the terminal:</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, NORCE Norwegian Research Centre AS.</p>
+    <p>&#169; Copyright 2022-2023, NORCE Norwegian Research Centre AS.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

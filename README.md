@@ -27,8 +27,10 @@ python3 -m venv vpymm
 source vpymm/bin/activate
 # Upgrade pip, setuptools, and wheel
 pip install --upgrade pip setuptools wheel
-# Install the pymm package
-pip install .
+# Install the pymm package (in editable mode for contributions/modifications; otherwise, pip install .)
+pip install -e .
+# For contributions/testing/linting, install the dev-requirements
+pip install -r dev-requirements.txt
 ```
 
 ## Running pymm
@@ -39,12 +41,15 @@ pymm -i some_input_image.png -p some_input_parameters.txt -o some_output_folder
 Run `pymm --help` to see all possible command line argument options. Inside the `some_input_parameters.txt` file you provide the framework parameters such as the dimensions of the microsystem, mesh size, inlet pressure, and more. See the .txt files in the examples folder.
 
 ## Getting started
-See the [_documentation_](https://daavid00.github.io/pymm/introduction.html).
+See the [_documentation_](https://daavid00.github.io/pymm/introduction.html). 
 
-## Examples
-All the numerical simulations included in the below publication can be found in the examples folder. 
+## Journal papers using pymm
+The following is a list of journal papers in which _pymm_ is used:
 
-## Citing
-If you use _pymm_ in your research, please cite the following publication: 
+1. Liu, N., Haugen, M., Benali, B., Landa-Marbán, D., Fernø, M.A., 2023. Pore-scale spatiotemporal dynamics of microbial-induced calcium carbonate growth and distribution in porous media.  Int. J. Greenh. Gas Control 125, 103885. https://doi.org/10.1016/j.ijggc.2023.103885
+1. Liu, N., Haugen, M., Benali, B., Landa-Marbán, D., Fernø, M.A., 2023. Pore-scale kinetics of calcium dissolution and secondary precipitation during geological carbon storage. Chem. Geol., to appear.
 
-Liu, N., Haugen, M., Benali, B., Landa-Marbán, D., Fernø, M.A., 2023. Pore-scale spatiotemporal dynamics of microbial-induced calcium carbonate growth and distribution in porous media.  Int. J. Greenh. Gas Control 125, 103885. https://doi.org/10.1016/j.ijggc.2023.103885
+## About pymm
+The image-based Python package for computational fluid dynamics pymm is funded by Center for Sustainable Subsurface Resources [project no. 331841] and NORCE Norwegian Research Centre As [project number 101070]. 
+
+Contributions are more than welcome using the fork and pull request approach.

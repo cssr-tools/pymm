@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Configuration file &mdash; pymm  documentation</title>
@@ -11,12 +11,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -30,12 +29,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: #aaaaaa" >
-            <a href="index.html">
-            <img src="_static/pymm_logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/pymm_logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -53,6 +56,7 @@
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">pymm Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="output_folder.html">Output folder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="related.html">Related</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About pymm</a></li>
 </ul>
 
@@ -69,8 +73,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Configuration file</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Configuration file</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/configuration_file.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -81,18 +85,18 @@
            <div itemprop="articleBody">
              
   <section id="configuration-file">
-<h1>Configuration file<a class="headerlink" href="#configuration-file" title="Permalink to this heading"></a></h1>
+<h1>Configuration file<a class="headerlink" href="#configuration-file" title="Link to this heading"></a></h1>
 <p>Let us consider the image below (this image and the real dimensions can be
 extracted from Fig. 52 in <a class="reference external" href="https://hdl.handle.net/1956/21300">Benali2019</a> and Fig. 1c
-in <a class="reference internal" href="about.html#manuscript"><span class="std std-ref">Liu2022</span></a>.</p>
-<figure class="align-default" id="id2">
+in <a class="reference external" href="https://doi.org/10.1016/j.ijggc.2023.103885">Liu2022</a>.</p>
+<figure class="align-default" id="id4">
 <img alt="_images/microsystem.png" src="_images/microsystem.png" />
 <figcaption>
-<p><span class="caption-text">Grains and pore space configuration.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Grains and pore space configuration.</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>This image (2D) consists of 805x252 pixels, and the real dimensions (3D) are 6.74e-3 x 2.5e-3 x 0.03e-3 [m].
-We remark that the image of the pattern used in the numerical simulations in <a class="reference internal" href="about.html#manuscript"><span class="std std-ref">Liu2022</span></a>
+We remark that the image of the pattern used in the numerical simulations in <a class="reference external" href="https://doi.org/10.1016/j.ijggc.2023.103885">Liu2022</a>
 has a much higher resolution.</p>
 <p>The current implementation allows for the following input parameters:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="sd">&quot;&quot;&quot;Set the framework parameters&quot;&quot;&quot;</span>
@@ -123,7 +127,7 @@ has a much higher resolution.</p>
 <p>Do not remove # in each line (in the current implementation this is used for the reading of the parameters).</p>
 </div>
 <section id="image-related-parameters">
-<h2>Image-related parameters<a class="headerlink" href="#image-related-parameters" title="Permalink to this heading"></a></h2>
+<h2>Image-related parameters<a class="headerlink" href="#image-related-parameters" title="Link to this heading"></a></h2>
 <p>The three first parameters set the real dimensions of the microsystem. The next parameter sets the threshold
 value to convert the image to binary (valid values from 0 to 255). The rescaled factor parameter reduces the number
 of pixels of the image (valid values between 0 and 1, see
@@ -139,10 +143,10 @@ The following figure shows the internal grains and border for three decreasing v
 <figure class="align-default">
 <img alt="_images/size_100_1_1.png" src="_images/size_100_1_1.png" />
 </figure>
-<figure class="align-default" id="id3">
+<figure class="align-default" id="id5">
 <img alt="_images/size_0_0_0.png" src="_images/size_0_0_0.png" />
 <figcaption>
-<p><span class="caption-text">Extracted contours for minimum size of the cluster grains and tolerances for the polygon approximation of (top) 500, 5, 5, (middle) 100, 1, 1, and (bottom) 0, 0, 0, respectively.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Extracted contours for minimum size of the cluster grains and tolerances for the polygon approximation of (top) 500, 5, 5, (middle) 100, 1, 1, and (bottom) 0, 0, 0, respectively.</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <div class="admonition tip">
@@ -152,37 +156,37 @@ time to create the mesh and to run the simulations.</p>
 </div>
 </section>
 <section id="figure-and-device-related-parameters">
-<h2>Figure- and device-related parameters<a class="headerlink" href="#figure-and-device-related-parameters" title="Permalink to this heading"></a></h2>
+<h2>Figure- and device-related parameters<a class="headerlink" href="#figure-and-device-related-parameters" title="Link to this heading"></a></h2>
 <p>The figure parameter controls the line width of the contours on the output images, while the device parameter controls the
 width of the channels in the device microsystem (see the following subsection for details about the implemented device).</p>
 </section>
 <section id="mesh-related-parameters">
-<h2>Mesh-related parameters<a class="headerlink" href="#mesh-related-parameters" title="Permalink to this heading"></a></h2>
+<h2>Mesh-related parameters<a class="headerlink" href="#mesh-related-parameters" title="Link to this heading"></a></h2>
 <p>Currently the only input parameter (via de configuration file, one can always modify the template files) for the mesh is
 the mesh size. The following figure shows the generated mesh for two different mesh sizes.</p>
 <figure class="align-default">
 <img alt="_images/mesh_1e4.png" src="_images/mesh_1e4.png" />
 </figure>
-<figure class="align-default" id="id4">
+<figure class="align-default" id="id6">
 <img alt="_images/mesh_1e5.png" src="_images/mesh_1e5.png" />
 <figcaption>
-<p><span class="caption-text">Two different generated meshes of sizes (top) 1e-4 and (bottom) 1e-5.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Two different generated meshes of sizes (top) 1e-4 and (bottom) 1e-5.</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>There are currently two template files that define the configuration of the microsystem: image.mako and device.mako.
 The template image.mako considers that the flow is from top to bottom of the image, while device.mako creates the micromodel geometry as in
-<a class="reference external" href="https://hdl.handle.net/1956/21300">Benali2019</a> and <a class="reference internal" href="about.html#manuscript"><span class="std std-ref">Liu2022</span></a>. On the grains and device walls we consider no-slip conditions. Then one could look at those files to modify the values (e.g., the
+<a class="reference external" href="https://hdl.handle.net/1956/21300">Benali2019</a> and <a class="reference external" href="https://doi.org/10.1016/j.ijggc.2023.103885">Liu2022</a>. On the grains and device walls we consider no-slip conditions. Then one could look at those files to modify the values (e.g., the
 flow direction or create quad elements for the mesh) or to define new micromodel geometries (e.g., a micromodel with a vertical cross-type shape).
 The following figure shows the geometry of the device micromodel.</p>
-<figure class="align-default" id="id5">
+<figure class="align-default" id="id7">
 <img alt="_images/device.png" src="_images/device.png" />
 <figcaption>
-<p><span class="caption-text">Geometry of the device mode.</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Geometry of the device mode.</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
 <section id="remaining-parameters">
-<h2>Remaining parameters<a class="headerlink" href="#remaining-parameters" title="Permalink to this heading"></a></h2>
+<h2>Remaining parameters<a class="headerlink" href="#remaining-parameters" title="Link to this heading"></a></h2>
 <p>The remaining parameters are OpenFOAM related. Refer to the online OpenFOAM resources for details about
 the simulator and <a class="reference external" href="https://www.slideshare.net/ElwardiFadli/permeability-of-soils">this nice presentation</a>
 using the OpenFOAM solver simpleFoam in another micromodel application. Details about the solver simpleFoam
@@ -202,7 +206,7 @@ Details about the solver scalarTransportFoam and mathematical model can be found
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, NORCE Norwegian Research Centre AS.</p>
+    <p>&#169; Copyright 2022-2023, NORCE Norwegian Research Centre AS.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

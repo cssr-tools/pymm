@@ -3,14 +3,14 @@ Configuration file
 ==================
 Let us consider the image below (this image and the real dimensions can be 
 extracted from Fig. 52 in `Benali2019 <https://hdl.handle.net/1956/21300>`_ and Fig. 1c 
-in :ref:`Liu2022 <Manuscript>`. 
+in `Liu2022 <https://doi.org/10.1016/j.ijggc.2023.103885>`_. 
 
 .. figure:: figs/microsystem.png
 
     Grains and pore space configuration.
 
 This image (2D) consists of 805x252 pixels, and the real dimensions (3D) are 6.74e-3 x 2.5e-3 x 0.03e-3 [m]. 
-We remark that the image of the pattern used in the numerical simulations in :ref:`Liu2022 <Manuscript>`
+We remark that the image of the pattern used in the numerical simulations in `Liu2022 <https://doi.org/10.1016/j.ijggc.2023.103885>`_
 has a much higher resolution.
 
 The current implementation allows for the following input parameters:
@@ -88,7 +88,7 @@ the mesh size. The following figure shows the generated mesh for two different m
 
 There are currently two template files that define the configuration of the microsystem: image.mako and device.mako.
 The template image.mako considers that the flow is from top to bottom of the image, while device.mako creates the micromodel geometry as in 
-`Benali2019 <https://hdl.handle.net/1956/21300>`_ and :ref:`Liu2022 <Manuscript>`. On the grains and device walls we consider no-slip conditions. Then one could look at those files to modify the values (e.g., the 
+`Benali2019 <https://hdl.handle.net/1956/21300>`_ and `Liu2022 <https://doi.org/10.1016/j.ijggc.2023.103885>`_. On the grains and device walls we consider no-slip conditions. Then one could look at those files to modify the values (e.g., the 
 flow direction or create quad elements for the mesh) or to define new micromodel geometries (e.g., a micromodel with a vertical cross-type shape).
 The following figure shows the geometry of the device micromodel.
 

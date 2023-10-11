@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Device &mdash; pymm  documentation</title>
@@ -11,12 +11,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -28,12 +27,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: #aaaaaa" >
-            <a href="index.html">
-            <img src="_static/pymm_logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/pymm_logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -45,6 +48,7 @@
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">pymm Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="output_folder.html">Output folder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="related.html">Related</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About pymm</a></li>
 </ul>
 
@@ -61,8 +65,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Device</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Device</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/device.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -73,13 +77,13 @@
            <div itemprop="articleBody">
              
   <section id="device">
-<h1>Device<a class="headerlink" href="#device" title="Permalink to this heading"></a></h1>
+<h1>Device<a class="headerlink" href="#device" title="Link to this heading"></a></h1>
 <p>Here we consider the same image and configuration file as in the
 <a class="reference internal" href="image.html"><span class="doc">Image example</span></a>, but we are interested now on the
 device setup (the flow is from the top-left corner to the bottom-right
 corner of the device). Then we add the corresponding flag to the <strong>pymm</strong>
 executable:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pymm -t all -m device
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pymm<span class="w"> </span>-t<span class="w"> </span>all<span class="w"> </span>-m<span class="w"> </span>device
 </pre></div>
 </div>
 <p>The execution time was ca. 35 minutes and the following are screenshots of the simulation results:</p>
@@ -92,7 +96,7 @@ executable:</p>
 <figure class="align-default" id="id1">
 <img alt="_images/device_tracer.png" src="_images/device_tracer.png" />
 <figcaption>
-<p><span class="caption-text">Simulation results of the (top) pressure, (middle) velocity, and (bottom) tracer concentration.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Simulation results of the (top) pressure, (middle) velocity, and (bottom) tracer concentration.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -105,7 +109,7 @@ executable:</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, NORCE Norwegian Research Centre AS.</p>
+    <p>&#169; Copyright 2022-2023, NORCE Norwegian Research Centre AS.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

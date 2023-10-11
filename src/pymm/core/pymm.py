@@ -5,10 +5,10 @@ import glob
 import argparse
 import numpy as np
 import porespy as ps
+import skimage.transform
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from skimage import io, measure
-from skimage.transform import rescale
 from mako.template import Template
 
 
@@ -170,7 +170,7 @@ def process_image(dic, in_image):
                 imbr.append(True)
         dic["im"].append(imbr)
     dic["im"] = np.array(dic["im"])
-    dic["im"] = rescale(dic["im"], dic["res"])
+    dic["im"] = skimage.transform.rescale(dic["im"], dic["res"])
     dic["imH"] = dic["im"].shape[0]
     dic["imL"] = dic["im"].shape[1]
 
