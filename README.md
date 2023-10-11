@@ -2,6 +2,7 @@
 <a href="https://www.python.org/"><img src="https://img.shields.io/badge/python-3.8%20|%203.9%20|%203.10-blue.svg"></a>
 [![Code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8430989.svg)](https://doi.org/10.5281/zenodo.8430989)
 
 # pymm: An open-source image-based framework for CFD in microsystems 
 
@@ -50,6 +51,6 @@ The following is a list of journal papers in which _pymm_ is used:
 1. Liu, N., Haugen, M., Benali, B., Landa-Marbán, D., Fernø, M.A., 2023. Pore-scale kinetics of calcium dissolution and secondary precipitation during geological carbon storage. Chem. Geol., to appear.
 
 ## About pymm
-The image-based Python package for computational fluid dynamics pymm is funded by Center for Sustainable Subsurface Resources [project no. 331841] and NORCE Norwegian Research Centre As [project number 101070]. 
+The image-based Python package for computational fluid dynamics pymm is funded by [_Center for Sustainable Subsurface Resources_](https://cssr.no) [project no. 331841] and [_NORCE Norwegian Research Centre As_](https://www.norceresearch.no) [project number 101070]. 
 
 Contributions are more than welcome using the fork and pull request approach.
