@@ -26,4 +26,5 @@ def test_device():
         ],
         check=True,
     )
+    assert os.path.exists("./files/mesh.geo")
     os.chdir(cwd)

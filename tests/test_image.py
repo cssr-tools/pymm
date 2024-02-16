@@ -9,4 +9,5 @@ def test_image():
     cwd = os.getcwd()
     os.chdir(f"{os.getcwd()}/tests/configs")
     main()
+    assert os.path.exists("./output/interior_grains_border.png")
     os.chdir(cwd)

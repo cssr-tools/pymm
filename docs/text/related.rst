@@ -6,13 +6,13 @@ Below are some packages following the same configuration-file-to-postprocessing-
 check them out :).
 
 **********
-pyopmcsp11
+pyopmspe11
 **********
 
-.. image:: ./figs/pyopmcsp11.gif
+.. image:: ./figs/pyopmspe11.gif
     :scale: 50%
 
-`A Python framework using OPM Flow for the CSP11 benchmark project <https://github.com/daavid00/pyopmcsp11>`_.
+`A Python framework using OPM Flow for the CSP SPE11 benchmark project <https://github.com/OPM/pyopmspe11>`_.
 
 *************
 pyopmnearwell
