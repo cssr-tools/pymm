@@ -646,7 +646,7 @@ def main():
 
 
 # {
-# Copyright 2022, NORCE Norwegian Research Centre AS, Computational
+# Copyright 2022-2024, NORCE Norwegian Research Centre AS, Computational
 # Geosciences and Modelling.
 
 # This file is part of the pymm module.
