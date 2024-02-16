@@ -9,42 +9,37 @@ FoamFile
 {
     format      ascii;
     class       dictionary;
-    location    "system";
-    object      fvSchemes;
+    object      topoSetDict;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-ddtSchemes
-{
-    default         Euler;
-}
+actions
+(
+    {
+        name    f0;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        patch   inlet;
+    }
+    {
+        name    c0;
+        type    cellSet;
+        action  new;
+        source  faceToCell;
+        option  any;
+        set     f0;
+    }
 
-gradSchemes
-{
-    default        Gauss linear;
-}
+    {
+        name    c0Zone;
+        type    cellZoneSet;
+        action  new;
+        source  setToCellZone;
+        set     c0;
+    }
 
-divSchemes
-{
-    default         none;
-    div(phi,T)      bounded Gauss upwind;
-}
-
-laplacianSchemes
-{
-    default         none;
-    laplacian(DT,T) Gauss linear corrected;
-}
-
-interpolationSchemes
-{
-    default linear;
-}
-
-snGradSchemes
-{
-    default  corrected;
-}
+);
 
 
 // ************************************************************************* //

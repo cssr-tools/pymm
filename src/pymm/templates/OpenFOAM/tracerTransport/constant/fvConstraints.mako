@@ -14,8 +14,14 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-transportModel  Newtonian;
+fixedTemperature
+{
+    type            fixedTemperatureConstraint;
+    mode            uniform;
+    selectionMode   cellZone;
+    cellZone        c0Zone;
+    temperature     1.0;
+}
 
-nu              [0 2 -1 0 0 0 0] ${dic['nu']};
 
 // ************************************************************************* //

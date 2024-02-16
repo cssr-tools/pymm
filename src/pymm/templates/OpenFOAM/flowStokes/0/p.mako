@@ -1,13 +1,12 @@
 /*--------------------------------*- C++ -*----------------------------------*\
-| =========                 |                                                 |
-| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  v2206                                 |
-|   \\  /    A nd           | Website:  www.openfoam.com                      |
-|    \\/     M anipulation  |                                                 |
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  11
+     \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
-    version     2.0;
     format      ascii;
     class       volScalarField;
     object      p;

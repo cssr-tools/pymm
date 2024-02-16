@@ -12,11 +12,10 @@ This repository provides a workflow to perform computational fluid dynamics (CFD
 
 ## Installation
 You will first need to install
-* OpenFOAM (https://www.openfoam.com) (tested with OpenFOAM v2206)
-* Gmsh (https://gmsh.info) (tested with Gmsh 4.11.0) 
+* OpenFOAM (https://www.openfoam.com) (tested with OpenFOAM-11)
+* Gmsh (https://gmsh.info) (tested with Gmsh 4.8.4) 
 
-You will also need to install some python packages, see ```requirements.txt``` for a complete list. You can install all the required python packages in a virtual environment with the following commands:
-
+You will also need to install some Python packages, see ```requirements.txt``` for a complete list. You can install all the required Python packages in a virtual environment with the following commands:
 ```bash
 # Clone the repo
 git clone https://github.com/daavid00/pymm.git
@@ -33,6 +32,16 @@ pip install -e .
 # For contributions/testing/linting, install the dev-requirements
 pip install -r dev-requirements.txt
 ```
+Depending on the location where OpenFOAM is installed, then before running pymm (inside the vpymm Python environment), you need to enter the OpenFoam environment:
+```bash
+# Check where openFOAM is installed
+echo $WM_PROJECT_DIR
+# The return value was /opt/openfoam11, then we activate the environment
+source /opt/openfoam11/etc/bashrc
+# Then, if everything went fine, typing 
+gmshToFoam
+# should print the argument flags for that OpenFOAM executable.
+```
 
 ## Running pymm
 You can run _pymm_ as a single command line:
@@ -48,7 +57,7 @@ See the [_documentation_](https://daavid00.github.io/pymm/introduction.html).
 The following is a list of journal papers in which _pymm_ is used:
 
 1. Liu, N., Haugen, M., Benali, B., Landa-Marbán, D., Fernø, M.A., 2023. Pore-scale spatiotemporal dynamics of microbial-induced calcium carbonate growth and distribution in porous media.  Int. J. Greenh. Gas Control 125, 103885. https://doi.org/10.1016/j.ijggc.2023.103885
-1. Liu, N., Haugen, M., Benali, B., Landa-Marbán, D., Fernø, M.A., 2023. Pore-scale kinetics of calcium dissolution and secondary precipitation during geological carbon storage. Chem. Geol., to appear.
+1. Liu, N., Haugen, M., Benali, B., Landa-Marbán, D., Fernø, M.A., 2023. Pore-scale kinetics of calcium dissolution and secondary precipitation during geological carbon storage. Chem. Geol. 641, 121782. https://doi.org/10.1016/j.chemgeo.2023.121782.
 
 ## About pymm
 The image-based Python package for computational fluid dynamics pymm is funded by [_Center for Sustainable Subsurface Resources_](https://cssr.no) [project no. 331841] and [_NORCE Norwegian Research Centre As_](https://www.norceresearch.no) [project number 101070]. 

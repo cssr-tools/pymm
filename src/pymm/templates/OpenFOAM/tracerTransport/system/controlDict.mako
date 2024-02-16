@@ -1,24 +1,30 @@
 /*--------------------------------*- C++ -*----------------------------------*\
-| =========                 |                                                 |
-| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  v2206                                 |
-|   \\  /    A nd           | Website:  www.openfoam.com                      |
-|    \\/     M anipulation  |                                                 |
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  11
+     \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
-    version     2.0;
     format      ascii;
     class       dictionary;
+    location    "system";
     object      controlDict;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-application     scalarTransportFoam;
+application     foamRun;
 
-startFrom       startTime;
+solver          functions;
+
+subSolver       incompressibleFluid;
+
+startFrom       latestTime;
 
 startTime       0;
+
+subSolverTime   0;
 
 stopAt          endTime;
 
@@ -44,5 +50,9 @@ timePrecision   6;
 
 runTimeModifiable true;
 
+functions
+{
+    #includeFunc scalarTransport(T, diffusivity=constant, D = ${dic['D']})
+}
 
 // ************************************************************************* //
