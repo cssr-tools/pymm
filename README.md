@@ -1,4 +1,4 @@
-[![Build Status](https://github.com/daavid00/pymm/actions/workflows/CI.yml/badge.svg)](https://github.com/daavid00/pymm/actions/workflows/CI.yml)
+[![Build Status](https://github.com/cssr-tools/pymm/actions/workflows/CI.yml/badge.svg)](https://github.com/cssr-tools/pymm/actions/workflows/CI.yml)
 <a href="https://www.python.org/"><img src="https://img.shields.io/badge/python-3.8%20|%203.9%20|%203.10-blue.svg"></a>
 [![Code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
@@ -18,7 +18,7 @@ You will first need to install
 You will also need to install some Python packages, see ```requirements.txt``` for a complete list. You can install all the required Python packages in a virtual environment with the following commands:
 ```bash
 # Clone the repo
-git clone https://github.com/daavid00/pymm.git
+git clone https://github.com/cssr-tools/pymm.git
 # Get inside the folder
 cd pymm
 # Create virtual environment
@@ -32,7 +32,7 @@ pip install -e .
 # For contributions/testing/linting, install the dev-requirements
 pip install -r dev-requirements.txt
 ```
-Depending on the location where OpenFOAM is installed, then before running pymm (inside the vpymm Python environment), you need to enter the OpenFoam environment:
+Depending on the location where OpenFOAM is installed, then before running pymm (inside the vpymm Python environment), you need to enter the OpenFOAM environment:
 ```bash
 # Check where openFOAM is installed
 echo $WM_PROJECT_DIR
@@ -51,7 +51,7 @@ pymm -i some_input_image.png -p some_input_parameters.txt -o some_output_folder
 Run `pymm --help` to see all possible command line argument options. Inside the `some_input_parameters.txt` file you provide the framework parameters such as the dimensions of the microsystem, mesh size, inlet pressure, and more. See the .txt files in the examples folder.
 
 ## Getting started
-See the [_documentation_](https://daavid00.github.io/pymm/introduction.html). 
+See the [_documentation_](https://cssr-tools.github.io/pymm/introduction.html). 
 
 ## Journal papers using pymm
 The following is a list of journal papers in which _pymm_ is used:

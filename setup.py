@@ -20,7 +20,7 @@ setup(
     description="Open-source image-based workflow for CFD simulations in microsystems",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/dmar/pymm",
+    url="https://github.com/cssr-tools/pymm",
     author="David Landa-Marbán",
     mantainer="David Landa-Marbán",
     mantainer_email="dmar@norceresearch.no",

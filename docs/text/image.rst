@@ -5,7 +5,7 @@ Image
 In this example we consider the micromodel described in the
 :doc:`configuration file<./configuration_file>` section.
 
-The image is available in the examples folder in the `Github page <https://github.com/daavid00/pymm>`_
+The image is available in the examples folder in the `Github page <https://github.com/cssr-tools/pymm>`_
 with the default name 'microsystem.png'. The configuration file corresponds to the one in the 
 :doc:`configuration file<./configuration_file>` section and it is saved as 'parameters.txt' 
 (the default name for the configuration file). Since 'image' is the default entry for the simulation

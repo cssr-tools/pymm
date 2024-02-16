@@ -34,4 +34,4 @@ where
 Installation
 ------------
 
-See the `Github page <https://github.com/daavid00/pymm>`_.
+See the `Github page <https://github.com/cssr-tools/pymm>`_.

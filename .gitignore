@@ -133,6 +133,7 @@ dmypy.json
 
 # Extra folders
 vpymm
+cssr
 debugging
 developing
 tests/configs/files
