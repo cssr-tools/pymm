@@ -1,4 +1,5 @@
 """Main script"""
+
 import os
 import csv
 import glob
@@ -540,8 +541,8 @@ def run_stokes(dic):
     for file in [
         "0/p",
         "0/U",
-        "constant/transportProperties",
-        "constant/turbulenceProperties",
+        "constant/physicalProperties",
+        "constant/momentumTransport",
         "system/controlDict",
         "system/fvSchemes",
         "system/fvSolution",
@@ -564,7 +565,7 @@ def run_stokes(dic):
 
     with open("constant/polyMesh/boundary", "r", encoding="utf8") as file:
         dic["boundary"] = file.readlines()
-        dic["boundary"][22] = "type      empty;"
+        dic["boundary"][20] = "type      empty;"
     mytemplate = Template(filename=f"{dic['pat']}/templates/utils/boundary.mako")
     var = {"dic": dic}
     filled_template = mytemplate.render(**var)
@@ -573,7 +574,7 @@ def run_stokes(dic):
 
     os.system(f"rm -rf {dic['cwd']}/{dic['fol']}/VTK_flowStokes")
     # Running the steady-state flow simulation
-    os.system("simpleFoam & wait")
+    os.system("foamRun -solver incompressibleFluid & wait")
     os.system("foamToVTK & wait")
     os.system(f"mkdir {dic['cwd']}/{dic['fol']}/VTK_flowStokes")
     os.system(f"cp -r VTK/* {dic['cwd']}/{dic['fol']}/VTK_flowStokes")
@@ -596,11 +597,12 @@ def run_tracer(dic):
     os.system(f"mkdir {dic['cwd']}/{dic['fol']}/OpenFOAM/tracerTransport/system")
     var = {"dic": dic}
     for file in [
-        "inlet",
         "0/T",
-        "constant/transportProperties",
-        "constant/fvOptions",
+        "constant/physicalProperties",
+        "constant/momentumTransport",
+        "constant/fvConstraints",
         "system/controlDict",
+        "system/topoSetDict",
         "system/fvSchemes",
         "system/fvSolution",
     ]:
@@ -622,14 +624,18 @@ def run_tracer(dic):
         f"cp {latest_folder}U {dic['cwd']}/{dic['fol']}/OpenFOAM/tracerTransport/0/"
     )
     os.system(
+        f"cp {latest_folder}p {dic['cwd']}/{dic['fol']}/OpenFOAM/tracerTransport/0/"
+    )
+    os.system(
         f"cp -r {dic['cwd']}/{dic['fol']}/OpenFOAM/flowStokes/constant/polyMesh "
         f"{dic['cwd']}/{dic['fol']}/OpenFOAM/tracerTransport/constant/"
     )
     os.chdir(f"{dic['cwd']}/{dic['fol']}/OpenFOAM/tracerTransport")
-    os.system("setSet -batch inlet & wait")
+    os.system("topoSet & wait")
 
     # Running the simulation of tracer transport
-    os.system("scalarTransportFoam & wait")
+    os.system("foamRun & wait")
+    # exit()
     os.system("foamToVTK & wait")
     os.system(f"cp -r VTK/* {dic['cwd']}/{dic['fol']}/VTK_tracerTransport")
 
@@ -650,7 +656,7 @@ def main():
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 
-# ad-wa is distributed in the hope that it will be useful,
+# pymm is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
