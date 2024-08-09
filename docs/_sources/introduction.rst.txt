@@ -35,3 +35,7 @@ Installation
 ------------
 
 See the `Github page <https://github.com/cssr-tools/pymm>`_.
+
+.. tip::
+
+    See the `CI.yml <https://github.com/cssr-tools/pymm/blob/main/.github/workflows/CI.yml>`_.
