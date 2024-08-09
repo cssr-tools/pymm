@@ -2,8 +2,7 @@
 Related
 =======
 
-Below are some packages following the same configuration-file-to-postprocessing-folder approach; 
-check them out :).
+Below are some tools that might be of interest; check them out 🙂.
 
 **********
 pyopmspe11
@@ -23,14 +22,22 @@ pyopmnearwell
 
 `A framework to simulate near well dynamics using OPM Flow <https://github.com/daavid00/pyopmnearwell>`_.
 
-*******
-ad-micp
-*******
+******
+pycopm
+******
 
-.. image:: ./figs/ad-micp.gif
-    :scale: 40%
+.. image:: ./figs/pycopm.gif
+    :scale: 60%
 
-`A module to study CO2 leakage remediation by microbially induced calcite precipitation (MICP) <https://github.com/daavid00/ad-micp>`_.
+`Simplified and flexible framework for coarsening geological models <https://github.com/cssr-tools/pycopm>`_.
+
+*****
+plopm
+*****
+
+.. image:: ./figs/plopm.png
+
+`Quick generation of PNG figures from a simulation model given any 2D slide <https://github.com/cssr-tools/plopm>`_.
 
 ********
 expreccs
@@ -40,3 +47,12 @@ expreccs
     :scale: 50%
 
 `Expansion of ResourCes for CO2 Storage on the Horda Platform <https://github.com/daavid00/expreccs>`_.
+
+*******
+ad-micp
+*******
+
+.. image:: ./figs/ad-micp.gif
+    :scale: 40%
+
+`A module to study CO2 leakage remediation by microbially induced calcite precipitation (MICP) <https://github.com/daavid00/ad-micp>`_.
