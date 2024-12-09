@@ -7,7 +7,7 @@ name = "pymm"
 description = "Open-source image-based workflow for CFD simulations in microsystems"
 authors = [{ name = "David Landa-Marbán", email = "dmar@norceresearch.no" }]
 maintainers = [{ name = "David Landa-Marbán", email = "dmar@norceresearch.no" }]
-version = "v12"
+dynamic = ["version"]
 readme = {file = "README.md", content-type = "text/markdown"}
 license = {text = "GPL-3.0"}
 keywords = ["openfoam", "navier-stokes", "gmsh", "cfd", "microsystems"]
@@ -17,10 +17,6 @@ classifiers = [
     "Natural Language :: English",
     "Topic :: Scientific/Engineering",
     "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Operating System :: OS Independent"
 ]
@@ -29,7 +25,10 @@ dependencies = [
     "porespy",
     "pypardiso"
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.12"
+
+[tool.setuptools.dynamic]
+version = {attr = "pymm.__version__"}
 
 [project.scripts]
 pymm = "pymm.core.pymm:main"
