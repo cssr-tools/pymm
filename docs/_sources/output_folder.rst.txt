@@ -15,4 +15,4 @@ Then after running **pymm**, one could modify the generated OpenFOAM related fil
 run directly the simulations calling the OpenFOAM solvers, e.g., to change additional 
 tolerances that are not currently included in the parameters.txt file and/or to change 
 the numerical schemes (see the OpenFOAM documentation 
-`here <https://www.openfoam.com/documentation/user-guide/6-solving/6.2-numerical-schemes>`_.
+`here <https://www.openfoam.com/documentation/user-guide/6-solving/6.2-numerical-schemes>`_).

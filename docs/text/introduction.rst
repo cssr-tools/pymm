@@ -4,8 +4,12 @@ Introduction
 
 .. image:: ./figs/pymm.gif
 
-This documentation describes the content of the **pymm** package.
-This package relies on python packages (e.g., `porespy <https://porespy.org>`_ and 
+This documentation describes the **pymm** tool hosted in `https://github.com/cssr-tools/pymm <https://github.com/cssr-tools/pymm>`_.
+
+Description
+-----------
+
+The **pymm** tool relies on Python packages (e.g., `porespy <https://porespy.org>`_ and 
 `skimage <https://scikit-image.org>`_) to generate the spatial domains for the simulations from
 the microsystem images, and `Gmsh <https://gmsh.info>`_ as a mesh generator. 
 The numerical simulations for the water flow and tracer are performed using 
@@ -30,12 +34,3 @@ where
 - \-t, \-type: Run the whole framework ('all'), only the mesh part ('mesh'), keep the current mesh and only the flow ('flow'), flow and tracer ('flowntracer'), or only tracer ('tracer') ('mesh' by default).
 - \-o, \-output: The base name of the :doc:`output folder <./output_folder>` ('output' by default).
 - \-g, \-gmsh: The full path to the Gmsh executable or simple 'gmsh' if it runs from the terminal ('gmsh' by default).
-
-Installation
-------------
-
-See the `Github page <https://github.com/cssr-tools/pymm>`_.
-
-.. tip::
-
-    See the `CI.yml <https://github.com/cssr-tools/pymm/blob/main/.github/workflows/CI.yml>`_.

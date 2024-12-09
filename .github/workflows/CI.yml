@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.8']
+        python-version: ['3.12']
         os: [ubuntu-latest]
         
     runs-on: ${{ matrix.os }}
@@ -50,3 +50,8 @@ jobs:
     - name: Run the tests
       run: |
         pytest --cov=pymm --cov-report term-missing tests/
+
+    - name: Build documentation
+      run: |
+        pushd docs
+        make html

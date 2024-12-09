@@ -1,13 +1,15 @@
 """Test the device mode functionality"""
 
 import os
+import pathlib
 import subprocess
+
+dirname: pathlib.Path = pathlib.Path(__file__).parent
 
 
 def test_device():
     """See configs/parameters.txt"""
-    cwd = os.getcwd()
-    os.chdir(f"{os.getcwd()}/tests/configs")
+    os.chdir(f"{dirname}/configs")
     subprocess.run(
         [
             "pymm",
@@ -26,5 +28,4 @@ def test_device():
         ],
         check=True,
     )
-    assert os.path.exists("./files/mesh.geo")
-    os.chdir(cwd)
+    assert os.path.exists("./files/mesh.msh")

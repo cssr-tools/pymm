@@ -66,22 +66,22 @@ def pymm():
     dic["pat"] = os.path.dirname(__file__)[:-5]  # Path to the pyff folder
     dic["cwd"] = os.getcwd()  # Path to the folder of the parameters.txt file
     # Read the input values
-    dic = process_input(dic, cmdargs["parameters"])
+    process_input(dic, cmdargs["parameters"])
     if dic["wtr"] in ("all", "mesh"):
         # Generate the image
-        dic = process_image(dic, cmdargs["image"])
+        process_image(dic, cmdargs["image"])
         # Extract the coordinates of the image borders
-        dic = extract_borders(dic)
+        extract_borders(dic)
         # Identify the points on the borders
-        dic = identify_cells(dic)
+        identify_cells(dic)
         # Set the boundary tags
-        dic = boundary_tags_left_bottom(dic)
-        dic = boundary_tags_right_top(dic)
+        boundary_tags_left_bottom(dic)
+        boundary_tags_right_top(dic)
         # Write the .geo file
-        dic = write_geo(dic)
+        write_geo(dic)
     if (dic["wtr"] == "all" or dic["wtr"] == "flow") or dic["wtr"] == "flowntracer":
         # Setting up of the files for the Flow simulations and run it
-        dic = run_stokes(dic)
+        run_stokes(dic)
     if (dic["wtr"] == "all" or dic["wtr"] == "flowntracer") or dic["wtr"] == "tracer":
         # Setting up of the files for the Tracer simulations and run it
         run_tracer(dic)
@@ -139,7 +139,6 @@ def process_input(dic, in_file):
     dic["t_dt"] = float(
         lol[20][0]
     )  # Time step in the numerical scheme for the Tracer simulation [s]
-    return dic
 
 
 def process_image(dic, in_image):
@@ -204,8 +203,7 @@ def process_image(dic, in_image):
     dic["cn_grains"] = measure.find_contours(
         grains, 0.5, fully_connected="high", positive_orientation="high"
     )
-    dic = make_figures(dic)
-    return dic
+    make_figures(dic)
 
 
 def make_figures(dic):
@@ -274,7 +272,6 @@ def make_figures(dic):
     axis.set_xticks([])
     axis.set_yticks([])
     fig.savefig(f"{dic['cwd']}/{dic['fol']}/interior_grains_border.png", dpi=600)
-    return dic
 
 
 def extract_borders(dic):
@@ -337,7 +334,6 @@ def extract_borders(dic):
                     dic["imH"] - dic["bnd"][-i - 1, 0] + dic["ad_bord"],
                 ]
             )
-    return dic
 
 
 def pad_with(vector, pad_width, _iaxis, kwargs):
@@ -394,7 +390,6 @@ def identify_cells(dic):
             ]
         )
     dic["point"].append([dic["bl"] - dic["ad_bord"], dic["bb"] + 1 - dic["ad_bord"]])
-    return dic
 
 
 def boundary_tags_left_bottom(dic):
@@ -430,7 +425,6 @@ def boundary_tags_left_bottom(dic):
         else:
             dic["wall"].append(dic["j"])
         dic["j"] += 1
-    return dic
 
 
 def boundary_tags_right_top(dic):
@@ -469,7 +463,6 @@ def boundary_tags_right_top(dic):
             else:
                 dic["wall"].append(dic["j"])
             dic["j"] += 1
-    return dic
 
 
 def write_geo(dic):
@@ -518,7 +511,6 @@ def write_geo(dic):
                 file.write(filled_template)
 
     os.system(f"{dic['gmsh_path']} {dic['cwd']}/{dic['fol']}/mesh.geo -3 & wait")
-    return dic
 
 
 def run_stokes(dic):
@@ -578,7 +570,6 @@ def run_stokes(dic):
     os.system("foamToVTK & wait")
     os.system(f"mkdir {dic['cwd']}/{dic['fol']}/VTK_flowStokes")
     os.system(f"cp -r VTK/* {dic['cwd']}/{dic['fol']}/VTK_flowStokes")
-    return dic
 
 
 def run_tracer(dic):

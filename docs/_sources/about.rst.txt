@@ -10,3 +10,5 @@ Center for Sustainable Subsurface Resources [project no. 331841] and NORCE Norwe
 Research Centre As [project number 101070]. 
 
 Contributions are more than welcome using the fork and pull request approach.
+
+For a new feature, please request this raising an issue.
