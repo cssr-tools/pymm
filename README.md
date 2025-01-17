@@ -48,9 +48,9 @@ See the [_OpenFOAM page_](https://openfoam.org/download/12-ubuntu/), where from 
 ## Running pymm
 You can run _pymm_ as a single command line:
 ```
-pymm -i name_of_input_image.png -p input_parameters.txt -o output_folder
+pymm -i input_image.png -p input_parameters.toml -o output_folder
 ```
-Run `pymm --help` to see all possible command line argument options. Inside the `input_parameters.txt` file you provide the framework parameters such as the dimensions of the microsystem, mesh size, inlet pressure, and more.
+Run `pymm --help` to see all possible command line argument options. Inside the `input_parameters.toml` file you provide the framework parameters such as the dimensions of the microsystem, mesh size, inlet pressure, and more. See the .toml files in the [_examples_](https://github.com/cssr-tools/pymm/tree/main/examples) and [_tests_](https://github.com/cssr-tools/pymm/tree/main/tests/configs) folders.
 
 ## Getting started
 See the [_examples_](https://cssr-tools.github.io/pymm/examples.html) in the [_documentation_](https://cssr-tools.github.io/pymm/introduction.html).

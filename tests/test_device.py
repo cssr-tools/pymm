@@ -8,15 +8,15 @@ dirname: pathlib.Path = pathlib.Path(__file__).parent
 
 
 def test_device():
-    """See configs/parameters.txt"""
+    """See configs/parameters.toml"""
     os.chdir(f"{dirname}/configs")
     subprocess.run(
         [
             "pymm",
             "-i",
-            "microsystem.png",
+            "whiteish_grains.png",
             "-p",
-            "parameters.txt",
+            "whiteish_grains.toml",
             "-g",
             "gmsh",
             "-t",

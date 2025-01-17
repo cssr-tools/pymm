@@ -2,7 +2,7 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Version:  11
+    \\  /    A nd           | Version:  12
      \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
 FoamFile
@@ -26,7 +26,7 @@ boundaryField
     inlet
     {
         type            fixedValue;
-        value           uniform ${dic['bc_inlet']};   
+        value           uniform ${dic['inletValue']};   
     }
     outlet
     {
