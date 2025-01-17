@@ -8,7 +8,7 @@ dirname: pathlib.Path = pathlib.Path(__file__).parent
 
 
 def test_image():
-    """See configs/parameters.txt"""
+    """See configs/parameters.toml"""
     os.chdir(f"{dirname}/configs")
     main()
     assert os.path.exists("./output/mesh.msh")

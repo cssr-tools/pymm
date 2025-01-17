@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Introduction &mdash; pymm  documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
@@ -101,15 +101,15 @@ geometry of devices and solvers in OpenFOAM.</p>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
 <p>The current implementation supports the following executable with the argument options:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pymm<span class="w"> </span>-i<span class="w"> </span>image.png<span class="w"> </span>-p<span class="w"> </span>configuration_file.txt<span class="w"> </span>-o<span class="w"> </span>output<span class="w"> </span>-m<span class="w"> </span>image<span class="w"> </span>-t<span class="w"> </span>all<span class="w"> </span>-g<span class="w"> </span>gmsh
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pymm<span class="w"> </span>-i<span class="w"> </span>image.png<span class="w"> </span>-p<span class="w"> </span>parameters.toml<span class="w"> </span>-o<span class="w"> </span>output<span class="w"> </span>-m<span class="w"> </span>image<span class="w"> </span>-t<span class="w"> </span>all<span class="w"> </span>-g<span class="w"> </span>gmsh
 </pre></div>
 </div>
 <p>where</p>
 <ul class="simple">
 <li><p>-i, -image: The base name of the image (‘microsystem.png’ by default).</p></li>
-<li><p>-p, -parameters: The base name of the <a class="reference internal" href="configuration_file.html"><span class="doc">configuration file</span></a> (‘parameters.txt’ by default).</p></li>
+<li><p>-p, -parameters: The base name of the <a class="reference internal" href="configuration_file.html"><span class="doc">configuration file</span></a> (‘parameters.toml’ by default).</p></li>
 <li><p>-m, -mode: The configuration of the microsystem, currently only image and device supported (‘image’ by default).</p></li>
-<li><p>-t, -type: Run the whole framework (‘all’), only the mesh part (‘mesh’), keep the current mesh and only the flow (‘flow’), flow and tracer (‘flowntracer’), or only tracer (‘tracer’) (‘mesh’ by default).</p></li>
+<li><p>-t, -type: Run the whole framework (‘all’), only the generation of the PNG figures, with the segmentation to grains, voids, and boundary (‘pngs’), the mesh files for Gmsh (‘mesh’), keep the current mesh and only simulate the flow velocity field (‘flow’), mesh and flow (‘mesh_flow’), flow and tracer (‘flow_tracer’), or only tracer simulations (‘tracer’) (‘mesh’ by default).</p></li>
 <li><p>-o, -output: The base name of the <a class="reference internal" href="output_folder.html"><span class="doc">output folder</span></a> (‘output’ by default).</p></li>
 <li><p>-g, -gmsh: The full path to the Gmsh executable or simple ‘gmsh’ if it runs from the terminal (‘gmsh’ by default).</p></li>
 </ul>

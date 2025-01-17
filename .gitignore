@@ -136,6 +136,5 @@ vpymm
 cssr
 debugging
 developing
-playgroud
-tests/configs/files
-tests/configs/output
+playground
+**/tests/configs/*/

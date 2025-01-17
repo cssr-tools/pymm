@@ -1,9 +1,14 @@
-"""Main script"""
+# SPDX-FileCopyrightText: 2025 NORCE
+# SPDX-License-Identifier: GPL-3.0
+# pylint: disable=R0912,R0915
+
+"""Main script for pymm"""
 
 import os
-import csv
 import glob
 import argparse
+import tomllib
+import sys
 import numpy as np
 import porespy as ps
 import skimage.transform
@@ -27,8 +32,8 @@ def pymm():
     parser.add_argument(
         "-p",
         "--parameters",
-        default="parameters.txt",
-        help="The base name of the parameter file ('parameters.txt' by default).",
+        default="parameters.toml",
+        help="The base name of the parameter file ('parameters.toml' by default).",
     )
     parser.add_argument(
         "-m",
@@ -41,9 +46,11 @@ def pymm():
         "-t",
         "--type",
         default="mesh",
-        help="Run the whole framework ('all'), only the mesh part ('mesh'), "
-        "keep the current mesh and only the flow ('flow'), flow and tracer ('flowntracer'), "
-        "or only tracer ('tracer') ('mesh' by default).",
+        help="Run the whole framework ('all'), only the generation of the PNG figures "
+        "with the segmentation to grains, voids, and boundary ('pngs'), the mesh files "
+        "for Gmsh ('mesh'), keep the current mesh and only simulate the flow velocity "
+        "field ('flow'), mesh and flow ('mesh_flow'), flow and tracer ('flow_tracer'), "
+        "or only tracer simulations ('tracer') ('mesh' by default).",
     )
     parser.add_argument(
         "-o",
@@ -66,79 +73,54 @@ def pymm():
     dic["pat"] = os.path.dirname(__file__)[:-5]  # Path to the pyff folder
     dic["cwd"] = os.getcwd()  # Path to the folder of the parameters.txt file
     # Read the input values
-    process_input(dic, cmdargs["parameters"])
-    if dic["wtr"] in ("all", "mesh"):
+    if not os.path.exists(f"{dic['cwd']}/{cmdargs['parameters']}"):
+        print(f"The file {cmdargs['parameters']} is not found.")
+        sys.exit()
+    if cmdargs["parameters"].split(".")[-1] == "txt":
+        print("toml is used now for the parameter file; please update the file.")
+        sys.exit()
+    with open(cmdargs["parameters"], "rb") as file:
+        dic.update(tomllib.load(file))
+    if dic["wtr"] in ["all", "pngs", "mesh", "mesh_flow"]:
         # Generate the image
         process_image(dic, cmdargs["image"])
         # Extract the coordinates of the image borders
         extract_borders(dic)
-        # Identify the points on the borders
-        identify_cells(dic)
-        # Set the boundary tags
-        boundary_tags_left_bottom(dic)
-        boundary_tags_right_top(dic)
-        # Write the .geo file
-        write_geo(dic)
-    if (dic["wtr"] == "all" or dic["wtr"] == "flow") or dic["wtr"] == "flowntracer":
+        if dic["wtr"] in ["all", "mesh", "mesh_flow"]:
+            if dic["inletLocation"].lower() == "left":
+                dic["inlet"] = "L"
+                dic["outlet"] = "R"
+            elif dic["inletLocation"].lower() == "top":
+                dic["inlet"] = "T"
+                dic["outlet"] = "B"
+            elif dic["inletLocation"].lower() == "right":
+                dic["inlet"] = "R"
+                dic["outlet"] = "L"
+            elif dic["inletLocation"].lower() == "bottom":
+                dic["inlet"] = "B"
+                dic["outlet"] = "T"
+            else:
+                print(f"Invalid inletLocation {dic['inletLocation']}.")
+                sys.exit()
+            # Identify the points on the borders
+            identify_cells(dic)
+            # Set the boundary tags
+            boundary_tags_left_bottom(dic)
+            boundary_tags_right_top(dic)
+            # Write the .geo file
+            write_geo(dic)
+    if dic["wtr"] in ["all", "mesh_flow", "flow", "flow_tracer"]:
         # Setting up of the files for the Flow simulations and run it
+        if not os.path.exists(f"{dic['cwd']}/{dic['fol']}/mesh.msh"):
+            print("Run first either -t all or -t mesh.")
+            sys.exit()
         run_stokes(dic)
-    if (dic["wtr"] == "all" or dic["wtr"] == "flowntracer") or dic["wtr"] == "tracer":
+    if dic["wtr"] in ["all", "flow_tracer", "tracer"]:
+        if not os.path.exists(f"{dic['cwd']}/{dic['fol']}/OpenFOAM/flowStokes"):
+            print("Run first either -t all or -t mesh_flow.")
+            sys.exit()
         # Setting up of the files for the Tracer simulations and run it
         run_tracer(dic)
-
-
-def process_input(dic, in_file):
-    """
-    Function to process the input file
-
-    Args:
-
-        dic (dict): Global dictionary with required parameters
-        in_file (str): Name of the input text file
-
-    Returns:
-        dic (dict): Global dictionary with new added parameters
-    """
-    lol = []
-    with open(in_file, "r", encoding="utf8") as file:
-        for row in csv.reader(file, delimiter="#"):
-            lol.append(row)
-    dic["Ls"] = float(lol[1][0])  # Length of the microsystem [m]
-    dic["Hs"] = float(lol[2][0])  # Heigth of the microsystem [m]
-    dic["Ds"] = float(lol[3][0])  # Depth of the microsystem [m]
-    dic["thr"] = int(lol[4][0])  # Threshold for converting the image to binary
-    dic["res"] = float(lol[5][0])  # rescaled factor for the image
-    dic["size_grains"] = int(lol[6][0])  # Minimum size of the grain clusters [pixels]
-    dic["tol_border"] = float(
-        lol[7][0]
-    )  # Tolerance to approximate the border as polygon
-    dic["tol_grains"] = float(
-        lol[8][0]
-    )  # Tolerance to approximate the grains as polygon
-    dic["lw"] = float(
-        lol[9][0]
-    )  # Line width to show the contours in the produced figures
-    dic["Cs"] = float(
-        lol[10][0]
-    )  # Width of the top and bottom channels in the micromodel device [m]
-    dic["hz"] = float(lol[11][0])  # Mesh size [m]
-    dic["nu"] = float(
-        lol[12][0]
-    )  # Fluid kinematic viscocity [Dynamic viscocity/fluid_density, m2/s]
-    dic["D"] = float(lol[13][0])  # Diffusion coefficient for the tracer [m2/s]
-    dic["bc_inlet"] = float(
-        lol[14][0]
-    )  # Inlet boundary condition (Pressure/fluid_density, [Pa/(kg/m3)])
-    dic["t_et"] = float(lol[15][0])  # End time for the tracer simulation [s]
-    dic["t_wi"] = float(lol[16][0])  # Time interval to write the tracer results [s]
-    dic["p_tol"] = float(lol[17][0])  # Convergence criterium for the pressure solution
-    dic["u_tol"] = float(lol[18][0])  # Convergence criterium for the velocity solution
-    dic["f_maxI"] = float(
-        lol[19][0]
-    )  # Maximum number of iterations for the Stokes simulation
-    dic["t_dt"] = float(
-        lol[20][0]
-    )  # Time step in the numerical scheme for the Tracer simulation [s]
 
 
 def process_image(dic, in_image):
@@ -153,10 +135,10 @@ def process_image(dic, in_image):
         dic (dict): Global dictionary with new added parameters
     """
     # Read the image
-    im0 = np.array(io.imread(in_image))
-
+    im0 = np.array(io.imread(in_image, as_gray=True))
     # Convert the image to binary (black and white) and rescale
     dic["im"] = []
+    meaning = 1 - 2 * dic["grainMeaning"]
     for i in range(im0.shape[0]):
         imbr = []
         for j in range(im0.shape[1]):
@@ -164,13 +146,13 @@ def process_image(dic, in_image):
                 imbr.append(True)
             elif (i in (1, im0.shape[0] - 2)) and dic["mode"] == "device":
                 imbr.append(False)
-            elif im0[i][j][2] > dic["thr"]:
+            elif meaning * im0[im0.shape[0] - 1 - i][j] < meaning * dic["threshold"]:
                 imbr.append(False)
             else:
                 imbr.append(True)
         dic["im"].append(imbr)
     dic["im"] = np.array(dic["im"])
-    dic["im"] = skimage.transform.rescale(dic["im"], dic["res"])
+    dic["im"] = skimage.transform.rescale(dic["im"], dic["rescale"])
     dic["imH"] = dic["im"].shape[0]
     dic["imL"] = dic["im"].shape[1]
 
@@ -179,15 +161,18 @@ def process_image(dic, in_image):
     dic["im"] = np.pad(dic["im"], dic["ad_bord"], pad_with, padder=1)
 
     # Save the binary image for visualization
-    os.system(f"rm -rf {dic['cwd']}/{dic['fol']}")
-    os.system(f"mkdir {dic['cwd']}/{dic['fol']}")
-    fig, axis = plt.subplots(figsize=(4, 4))
+    if not os.path.exists(f"{dic['cwd']}/{dic['fol']}"):
+        os.system(f"mkdir {dic['cwd']}/{dic['fol']}")
+    ps.visualization.set_mpl_style()
+    fig, axis = plt.subplots()
     axis.imshow(
         dic["im"][dic["ad_bord"] : -dic["ad_bord"], dic["ad_bord"] : -dic["ad_bord"]],
-        cmap=mpl.colormaps["gray"],
+        cmap=mpl.colormaps["gray_r"],
     )
+    axis.axis("image")
+    axis.set_xticks([])
+    axis.set_yticks([])
     fig.savefig(f"{dic['cwd']}/{dic['fol']}/binary_image.png", dpi=600)
-
     # Extract the contour of the grains on the image border and interior
     dic["border"] = ps.filters.trim_small_clusters(
         dic["im"], size=(dic["imH"] + 2 * dic["imL"]) * dic["ad_bord"]
@@ -197,7 +182,7 @@ def process_image(dic, in_image):
     )
     grains = ps.filters.trim_small_clusters(
         np.logical_and(np.bitwise_not(dic["border"]), dic["im"]),
-        size=dic["size_grains"],
+        size=dic["grainsSize"],
     )
     grains = grains[dic["ad_bord"] : -dic["ad_bord"], dic["ad_bord"] : -dic["ad_bord"]]
     dic["cn_grains"] = measure.find_contours(
@@ -217,12 +202,16 @@ def make_figures(dic):
         dic (dict): Global dictionary with new added parameters
     """
     # Save the extracted border for visualization
-    ps.visualization.set_mpl_style()
     fig, axis = plt.subplots()
-    axis.imshow(dic["border"], cmap=mpl.colormaps["gray"])
+    axis.imshow(
+        dic["border"][
+            dic["ad_bord"] : -dic["ad_bord"], dic["ad_bord"] : -dic["ad_bord"]
+        ],
+        cmap=mpl.colormaps["gray_r"],
+    )
     lmax = 0
     for contour in dic["cn_border"]:
-        contour = measure.approximate_polygon(contour, tolerance=dic["tol_border"])
+        contour = measure.approximate_polygon(contour, tolerance=dic["borderTol"])
         peri = max(
             (contour[:, 0] - np.roll(contour[:, 0], 1)) ** 2
             + (contour[:, 1] - np.roll(contour[:, 1], 1)) ** 2
@@ -230,7 +219,11 @@ def make_figures(dic):
         if peri > lmax:
             lmax = peri
             dic["bnd"] = contour
-    axis.plot(dic["bnd"][:, 1], dic["bnd"][:, 0], linewidth=dic["lw"])
+    axis.plot(
+        dic["bnd"][:, 1] - dic["ad_bord"],
+        dic["bnd"][:, 0] - dic["ad_bord"],
+        linewidth=dic["lineWidth"],
+    )
     axis.axis("image")
     axis.set_xticks([])
     axis.set_yticks([])
@@ -240,13 +233,13 @@ def make_figures(dic):
     fig, axis = plt.subplots()
     axis.imshow(
         dic["im"][dic["ad_bord"] : -dic["ad_bord"], dic["ad_bord"] : -dic["ad_bord"]],
-        cmap=mpl.colormaps["gray"],
+        cmap=mpl.colormaps["gray_r"],
     )
     lmax = 0
     for contour in dic["cn_grains"]:
-        bng = measure.approximate_polygon(contour, tolerance=dic["tol_grains"])
+        bng = measure.approximate_polygon(contour, tolerance=dic["grainsTol"])
         if len(contour) > 3:
-            axis.plot(bng[:, 1], bng[:, 0], linewidth=dic["lw"])
+            axis.plot(bng[:, 1], bng[:, 0], linewidth=dic["lineWidth"])
     axis.axis("image")
     axis.set_xticks([])
     axis.set_yticks([])
@@ -256,18 +249,18 @@ def make_figures(dic):
     fig, axis = plt.subplots()
     axis.imshow(
         dic["im"][dic["ad_bord"] : -dic["ad_bord"], dic["ad_bord"] : -dic["ad_bord"]],
-        cmap=mpl.colormaps["gray"],
+        cmap=mpl.colormaps["gray_r"],
     )
     axis.plot(
         dic["bnd"][:, 1] - dic["ad_bord"],
         dic["bnd"][:, 0] - dic["ad_bord"],
-        linewidth=dic["lw"],
+        linewidth=dic["lineWidth"],
     )
     lmax = 0
     for contour in dic["cn_grains"]:
-        bng = measure.approximate_polygon(contour, tolerance=dic["tol_grains"])
+        bng = measure.approximate_polygon(contour, tolerance=dic["grainsTol"])
         if len(contour) > 3:
-            axis.plot(bng[:, 1], bng[:, 0], linewidth=dic["lw"])
+            axis.plot(bng[:, 1], bng[:, 0], linewidth=dic["lineWidth"])
     axis.axis("image")
     axis.set_xticks([])
     axis.set_yticks([])
@@ -295,12 +288,12 @@ def extract_borders(dic):
     dic["bl"] = min(dic["bnd"][:, 1])
     dic["bt"] = max(dic["bnd"][:, 0])
     dic["br"] = max(dic["bnd"][:, 1])
-    for i in range(len(dic["bnd"]) - 2):
+    for i in range(len(dic["bnd"]) - 1):
         if dic["bnd"][-i - 1, 0] > dic["bb"] + 1 and dic["aa"] == 0:
             dic["pr"].append(
                 [
                     dic["bnd"][-i - 1, 1] - dic["ad_bord"],
-                    dic["imH"] - dic["bnd"][-i - 1, 0] + dic["ad_bord"],
+                    dic["bnd"][-i - 1, 0] - dic["ad_bord"],
                 ]
             )
         else:
@@ -311,27 +304,27 @@ def extract_borders(dic):
             dic["pb"].append(
                 [
                     dic["bnd"][-i - 1, 1] - dic["ad_bord"],
-                    dic["imH"] - dic["bnd"][-i - 1, 0] + dic["ad_bord"],
+                    dic["bnd"][-i - 1, 0] - dic["ad_bord"],
                 ]
             )
         if dic["bnd"][-i - 1, 1] < dic["bl"] + 1:
             dic["dd"] = 1
-        if (dic["bnd"][-i - 1, 0] > dic["bb"] + 1 and dic["dd"] == 1) and (
+        if (dic["bnd"][-i - 1, 0] > dic["bb"] - 1 and dic["dd"] == 1) and (
             dic["cc"] == 0 and len(dic["pb"]) > 0
         ):
             dic["pl"].append(
                 [
                     dic["bnd"][-i - 1, 1] - dic["ad_bord"],
-                    dic["imH"] - dic["bnd"][-i - 1, 0] + dic["ad_bord"],
+                    dic["bnd"][-i - 1, 0] - dic["ad_bord"],
                 ]
             )
-        if dic["bnd"][-i - 1 - 1, 0] > dic["bt"] - 1 and dic["aa"] == 1:
+        if dic["bnd"][-i - 1, 0] > dic["bt"] - 1 and dic["aa"] == 1:
             dic["cc"] = 1
         if len(dic["pl"]) > 0 + 1 and dic["cc"] == 1:
             dic["pt"].append(
                 [
                     dic["bnd"][-i - 1, 1] - dic["ad_bord"],
-                    dic["imH"] - dic["bnd"][-i - 1, 0] + dic["ad_bord"],
+                    dic["bnd"][-i - 1, 0] - dic["ad_bord"],
                 ]
             )
 
@@ -357,39 +350,35 @@ def identify_cells(dic):
         dic (dict): Global dictionary with new added parameters
     """
     dic["point"] = []
-    dic["point"].append([dic["bl"] - dic["ad_bord"], dic["bb"] + 1 - dic["ad_bord"]])
     for i in range(len(dic["pl"])):
         dic["point"].append(
             [
-                dic["pl"][len(dic["pl"]) - 1 - i][0],
-                dic["pl"][len(dic["pl"]) - 1 - i][1],
+                dic["pl"][i][0],
+                dic["pl"][i][1],
             ]
         )
-    dic["point"].append([dic["bl"] - dic["ad_bord"], dic["bt"] + 1 - dic["ad_bord"]])
-    for i in range(len(dic["pb"]) - 1):
+    for i in range(len(dic["pt"]) - 1):
         dic["point"].append(
             [
-                dic["pb"][len(dic["pb"]) - 1 - i][0],
-                dic["pb"][len(dic["pb"]) - 1 - i][1],
+                dic["pt"][i + 1][0],
+                dic["pt"][i + 1][1],
             ]
         )
-    dic["point"].append([dic["br"] - dic["ad_bord"], dic["bt"] + 1 - dic["ad_bord"]])
-    for i in range(len(dic["pr"]) - 1):
+    for i in range(len(dic["pr"])):
         dic["point"].append(
             [
-                dic["pr"][len(dic["pr"]) - 1 - i][0],
-                dic["pr"][len(dic["pr"]) - 1 - i][1],
+                dic["pr"][i][0],
+                dic["pr"][i][1],
             ]
         )
-    dic["point"].append([dic["br"] - dic["ad_bord"], dic["bb"] + 1 - dic["ad_bord"]])
-    for i in range(len(dic["pt"]) - 2):
+    for i in range(len(dic["pb"])):
         dic["point"].append(
             [
-                dic["pt"][len(dic["pt"]) - 1 - i][0],
-                dic["pt"][len(dic["pt"]) - 1 - i][1],
+                dic["pb"][i][0],
+                dic["pb"][i][1],
             ]
         )
-    dic["point"].append([dic["bl"] - dic["ad_bord"], dic["bb"] + 1 - dic["ad_bord"]])
+    dic["point"].append(dic["point"][0])
 
 
 def boundary_tags_left_bottom(dic):
@@ -406,20 +395,19 @@ def boundary_tags_left_bottom(dic):
     dic["bdnT"] = []
     dic["wall"] = []
     dic["j"] = 0
-    for _ in range(len(dic["pl"]) + 1):
+    for _ in range(len(dic["pl"]) - 1):
         if (
-            abs(dic["bl"] - dic["ad_bord"] - dic["point"][dic["j"]][0]) < 0.1
-            and abs(dic["bl"] - dic["ad_bord"] - dic["point"][dic["j"] + 1][0]) < 0.1
+            abs(dic["bl"] - dic["ad_bord"] - dic["point"][dic["j"]][0]) < 1
+            and abs(dic["bl"] - dic["ad_bord"] - dic["point"][dic["j"] + 1][0]) < 1
         ):
             dic["bdnL"].append(dic["j"])
         else:
             dic["wall"].append(dic["j"])
         dic["j"] += 1
-    for _ in range(len(dic["pb"])):
+    for _ in range(len(dic["pt"])):
         if (
-            abs(dic["bt"] + 1.0 - dic["ad_bord"] - dic["point"][dic["j"]][1]) < 0.1
-            and abs(dic["bt"] + 1.0 - dic["ad_bord"] - dic["point"][dic["j"] + 1][1])
-            < 0.1
+            abs(dic["bt"] - dic["ad_bord"] - dic["point"][dic["j"]][1]) < 1
+            and abs(dic["bt"] - dic["ad_bord"] - dic["point"][dic["j"] + 1][1]) < 1
         ):
             dic["bdnT"].append(dic["j"])
         else:
@@ -441,23 +429,20 @@ def boundary_tags_right_top(dic):
     dic["bdnB"] = []
     for _ in range(len(dic["pr"])):
         if (
-            abs(dic["br"] - dic["ad_bord"] - dic["point"][dic["j"]][0]) < 0.1
-            and abs(dic["br"] - dic["ad_bord"] - dic["point"][dic["j"] + 1][0]) < 0.1
+            abs(dic["br"] - dic["ad_bord"] - dic["point"][dic["j"]][0]) < 1
+            and abs(dic["br"] - dic["ad_bord"] - dic["point"][dic["j"] + 1][0]) < 1
         ):
             dic["bdnR"].append(dic["j"])
         else:
             dic["wall"].append(dic["j"])
         dic["j"] += 1
-    if len(dic["pt"]) == 0:
+    if len(dic["pb"]) == 0:
         dic["bdnB"].append(dic["j"])
     else:
-        for _ in range(len(dic["pt"]) - 1):
+        for _ in range(len(dic["pb"])):
             if (
-                abs(dic["bb"] + 1.0 - dic["ad_bord"] - dic["point"][dic["j"]][1]) < 0.1
-                and abs(
-                    dic["bb"] + 1.0 - dic["ad_bord"] - dic["point"][dic["j"] + 1][1]
-                )
-                < 0.1
+                abs(dic["bb"] - dic["ad_bord"] - dic["point"][dic["j"]][1]) < 1
+                and abs(dic["bb"] - dic["ad_bord"] - dic["point"][dic["j"] + 1][1]) < 1
             ):
                 dic["bdnB"].append(dic["j"])
             else:
@@ -481,7 +466,7 @@ def write_geo(dic):
     with open(f"{dic['cwd']}/{dic['fol']}/mesh.geo", "w", encoding="utf8") as file:
         file.write(filled_template)
     for contour in dic["cn_grains"]:
-        contour = measure.approximate_polygon(contour, tolerance=dic["tol_grains"])
+        contour = measure.approximate_polygon(contour, tolerance=dic["grainsTol"])
         if len(contour) > 3:
             with open(
                 f"{dic['cwd']}/{dic['fol']}/mesh.geo", "r", encoding="utf8"
@@ -497,7 +482,7 @@ def write_geo(dic):
                 if dic["geo"][k[0]][:6] == "Mesh 3":
                     dic["lf"] = k[0]
             for i in range(len(contour) - 1):
-                dic["p"].append([contour[i, 1], dic["imH"] - contour[i, 0]])
+                dic["p"].append([contour[i, 1], contour[i, 0]])
 
             # Update the .geo file adding a new grain
             mytemplate = Template(
@@ -509,7 +494,6 @@ def write_geo(dic):
                 f"{dic['cwd']}/{dic['fol']}/mesh.geo", "w", encoding="utf8"
             ) as file:
                 file.write(filled_template)
-
     os.system(f"{dic['gmsh_path']} {dic['cwd']}/{dic['fol']}/mesh.geo -3 & wait")
 
 
@@ -524,12 +508,14 @@ def run_stokes(dic):
         dic (dict): Global dictionary with new added parameters
     """
     var = {"dic": dic}
-    os.system(f"mkdir {dic['cwd']}/{dic['fol']}/OpenFOAM")
-    os.system(f"rm -rf {dic['cwd']}/{dic['fol']}/OpenFOAM/flowStokes")
-    os.system(f"mkdir {dic['cwd']}/{dic['fol']}/OpenFOAM/flowStokes")
-    os.system(f"mkdir {dic['cwd']}/{dic['fol']}/OpenFOAM/flowStokes/0")
-    os.system(f"mkdir {dic['cwd']}/{dic['fol']}/OpenFOAM/flowStokes/constant")
-    os.system(f"mkdir {dic['cwd']}/{dic['fol']}/OpenFOAM/flowStokes/system")
+    if not os.path.exists(f"{dic['cwd']}/{dic['fol']}/OpenFOAM"):
+        os.system(f"mkdir {dic['cwd']}/{dic['fol']}/OpenFOAM")
+    for name in ["OpenFOAM/flowStokes", "VTK_flowStokes"]:
+        if os.path.exists(f"{dic['cwd']}/{dic['fol']}/{name}"):
+            os.system(f"rm -rf {dic['cwd']}/{dic['fol']}/{name}")
+        os.system(f"mkdir {dic['cwd']}/{dic['fol']}/{name}")
+    for name in ["0", "constant", "system"]:
+        os.system(f"mkdir {dic['cwd']}/{dic['fol']}/OpenFOAM/flowStokes/{name}")
     for file in [
         "0/p",
         "0/U",
@@ -564,11 +550,9 @@ def run_stokes(dic):
     with open("constant/polyMesh/boundary", "w", encoding="utf8") as file:
         file.write(filled_template)
 
-    os.system(f"rm -rf {dic['cwd']}/{dic['fol']}/VTK_flowStokes")
     # Running the steady-state flow simulation
     os.system("foamRun -solver incompressibleFluid & wait")
     os.system("foamToVTK & wait")
-    os.system(f"mkdir {dic['cwd']}/{dic['fol']}/VTK_flowStokes")
     os.system(f"cp -r VTK/* {dic['cwd']}/{dic['fol']}/VTK_flowStokes")
 
 
@@ -580,12 +564,12 @@ def run_tracer(dic):
         dic (dict): Global dictionary with required parameters
     """
     os.chdir(f"{dic['cwd']}")
-    os.system(f"mkdir {dic['cwd']}/{dic['fol']}/VTK_tracerTransport")
-    os.system(f"rm -rf {dic['cwd']}/{dic['fol']}/OpenFOAM/tracerTransport")
-    os.system(f"mkdir {dic['cwd']}/{dic['fol']}/OpenFOAM/tracerTransport")
-    os.system(f"mkdir {dic['cwd']}/{dic['fol']}/OpenFOAM/tracerTransport/0")
-    os.system(f"mkdir {dic['cwd']}/{dic['fol']}/OpenFOAM/tracerTransport/constant")
-    os.system(f"mkdir {dic['cwd']}/{dic['fol']}/OpenFOAM/tracerTransport/system")
+    for name in ["VTK_tracerTransport", "OpenFOAM/tracerTransport"]:
+        if os.path.exists(f"{dic['cwd']}/{dic['fol']}/{name}"):
+            os.system(f"rm -rf {dic['cwd']}/{dic['fol']}/{name}")
+        os.system(f"mkdir {dic['cwd']}/{dic['fol']}/{name}")
+    for name in ["0", "constant", "system"]:
+        os.system(f"mkdir {dic['cwd']}/{dic['fol']}/OpenFOAM/tracerTransport/{name}")
     var = {"dic": dic}
     for file in [
         "0/T",
@@ -626,7 +610,6 @@ def run_tracer(dic):
 
     # Running the simulation of tracer transport
     os.system("foamRun & wait")
-    # exit()
     os.system("foamToVTK & wait")
     os.system(f"cp -r VTK/* {dic['cwd']}/{dic['fol']}/VTK_tracerTransport")
 
@@ -637,7 +620,7 @@ def main():
 
 
 # {
-# Copyright 2022-2024, NORCE Norwegian Research Centre AS, Computational
+# Copyright 2022-2025, NORCE Norwegian Research Centre AS, Computational
 # Geosciences and Modelling.
 
 # This file is part of the pymm module.

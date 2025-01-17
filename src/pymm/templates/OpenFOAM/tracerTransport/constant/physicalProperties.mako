@@ -2,7 +2,7 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Version:  11
+    \\  /    A nd           | Version:  12
      \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
 FoamFile
@@ -16,6 +16,6 @@ FoamFile
 
 viscosityModel  constant;
 
-nu              [0 2 -1 0 0 0 0] ${dic['nu']};
+nu              [0 2 -1 0 0 0 0] ${dic['viscocity']};
 
 // ************************************************************************* //

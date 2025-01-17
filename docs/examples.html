@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Examples &mdash; pymm  documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
@@ -93,9 +93,9 @@
 <a class="reference internal" href="configuration_file.html"><span class="doc">configuration file</span></a> section.</p>
 <p>The image is available in the examples folder in the <a class="reference external" href="https://github.com/cssr-tools/pymm">Github page</a>
 with the default name ‘microsystem.png’. The configuration file corresponds to the one in the
-<a class="reference internal" href="configuration_file.html"><span class="doc">configuration file</span></a> section and it is saved as ‘parameters.txt’
+<a class="reference internal" href="configuration_file.html"><span class="doc">configuration file</span></a> section and it is saved as ‘parameters.toml’
 (the default name for the configuration file). Since ‘image’ is the default entry for the simulation
-setup (i.e., the flow is from top to bottom), and assuming that the command ‘gmsh’ in the terminal
+setup, and assuming that the command ‘gmsh’ in the terminal
 executes Gmsh, then to run the whole framework (meshing, flow, and tracer) it is enough to add the
 ‘-t all’ command line to the pymm executable:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pymm<span class="w"> </span>-t<span class="w"> </span>all
@@ -144,34 +144,36 @@ executable:</p>
 <p>In this example we consider a micromodel available online in Fig. 2a in
 <a class="reference external" href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2007WR006641">Joekar-Niasar et al. 2009</a>.</p>
 <p>The image was extracted by screenshot and saved with the name ‘online.png’ (1068x1068 pixels).
-The configuration file was saved as ‘configuration.txt’ and contained the following text:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="sd">&quot;&quot;&quot;Set the framework parameters&quot;&quot;&quot;</span>
-<span class="linenos"> 2</span><span class="mf">600e-6</span>      <span class="c1">#Image-related, length of the microsystem [m]</span>
-<span class="linenos"> 3</span><span class="mf">600e-6</span>      <span class="c1">#Image-related, height of the microsystem [m]</span>
-<span class="linenos"> 4</span><span class="mf">1.8e-6</span>      <span class="c1">#Image-related, depth of the microsystem [m]</span>
-<span class="linenos"> 5</span><span class="mi">160</span>         <span class="c1">#Image-related, threshold for converting the image to binary</span>
-<span class="linenos"> 6</span><span class="mf">1.0</span>         <span class="c1">#Image-related, rescaled factor for the input image</span>
-<span class="linenos"> 7</span><span class="mi">50</span>          <span class="c1">#Image-related, minimum size of the grain clusters</span>
-<span class="linenos"> 8</span><span class="mf">1.0</span>         <span class="c1">#Image-related, tolerance to approximate the border as polygon</span>
-<span class="linenos"> 9</span><span class="mf">1.0</span>         <span class="c1">#Image-related, tolerance to approximate the grains as polygon</span>
-<span class="linenos">10</span><span class="mf">1.0</span>         <span class="c1">#Figure-related, line width to show the contours in the produced figures</span>
-<span class="linenos">11</span><span class="mf">6e-6</span>        <span class="c1">#Device-related, width of the top and bottom channels in the micromodel device [m]</span>
-<span class="linenos">12</span><span class="mf">1e-6</span>        <span class="c1">#Mesh-related, mesh size [m]</span>
-<span class="linenos">13</span><span class="mf">1e-6</span>        <span class="c1">#Fluid-related, kinematic viscosity [Dynamic viscosity/fluid_density, m2/s]</span>
-<span class="linenos">14</span><span class="mf">1e-12</span>       <span class="c1">#Tracer-related, diffusion coefficient [m2/s]</span>
-<span class="linenos">15</span><span class="mf">2.0e-3</span>      <span class="c1">#Simulation-related, inlet boundary condition (Pressure/fluid_density, [Pa/(kg/m3)])</span>
-<span class="linenos">16</span><span class="mf">120.0</span>       <span class="c1">#Simulation-related, end time for the tracer simulation [s]</span>
-<span class="linenos">17</span><span class="mf">1.0</span>         <span class="c1">#Simulation-related, time interval to write the tracer results [s]</span>
-<span class="linenos">18</span><span class="mf">1e-7</span>        <span class="c1">#Solver-related, convergence criterium for the pressure solution in the numerical scheme for the Stokes simulation</span>
-<span class="linenos">19</span><span class="mf">1e-8</span>        <span class="c1">#Solver-related, convergence criterium for the velocity solution in the numerical scheme for the Stokes simulation</span>
-<span class="linenos">20</span><span class="mi">10000</span>       <span class="c1">#Solver-related, maximum number of iterations for the Stokes simulation in case the convergence criteria have not been reached</span>
-<span class="linenos">21</span><span class="mf">1.0</span>         <span class="c1">#Solver-related, time step in the numerical scheme for the Tracer simulation [s]</span>
+The configuration file was saved as ‘configuration.toml’ and contained the following text:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#Set the pymm parameters</span>
+<span class="linenos"> 2</span><span class="n">lenght</span> <span class="o">=</span> <span class="mf">600e-6</span>       <span class="c1">#Image-related, length of the microsystem [m]</span>
+<span class="linenos"> 3</span><span class="n">width</span> <span class="o">=</span> <span class="mf">600e-6</span>        <span class="c1">#Image-related, height of the microsystem [m]</span>
+<span class="linenos"> 4</span><span class="n">tickness</span> <span class="o">=</span> <span class="mf">1.8e-6</span>     <span class="c1">#Image-related, depth of the microsystem [m]</span>
+<span class="linenos"> 5</span><span class="n">grainMeaning</span> <span class="o">=</span> <span class="mi">1</span>      <span class="c1">#Image-related, 0 if the grains in the image are light colors (e.g., white) or 1 for dark colors (e.g., black)</span>
+<span class="linenos"> 6</span><span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.5</span>       <span class="c1">#Image-related, threshold for converting the image to binary</span>
+<span class="linenos"> 7</span><span class="n">rescale</span> <span class="o">=</span> <span class="mi">1</span>           <span class="c1">#Image-related, rescaled factor for the input image</span>
+<span class="linenos"> 8</span><span class="n">grainsSize</span> <span class="o">=</span> <span class="mi">50</span>       <span class="c1">#Image-related, minimum size of the grain clusters</span>
+<span class="linenos"> 9</span><span class="n">borderTol</span> <span class="o">=</span> <span class="mi">1</span>         <span class="c1">#Image-related, tolerance to approximate the border as polygon</span>
+<span class="linenos">10</span><span class="n">grainsTol</span> <span class="o">=</span> <span class="mi">1</span>         <span class="c1">#Image-related, tolerance to approximate the grains as polygon</span>
+<span class="linenos">11</span><span class="n">lineWidth</span> <span class="o">=</span> <span class="mi">1</span>         <span class="c1">#Figure-related, line width to show the contours in the produced figures</span>
+<span class="linenos">12</span><span class="n">channelWidth</span> <span class="o">=</span> <span class="mf">6e-6</span>   <span class="c1">#Device-related, width of the top and bottom channels in the micromodel device [m]</span>
+<span class="linenos">13</span><span class="n">meshSize</span> <span class="o">=</span> <span class="mf">1e-6</span>       <span class="c1">#Mesh-related, mesh size [m]</span>
+<span class="linenos">14</span><span class="n">viscocity</span> <span class="o">=</span> <span class="mf">1e-6</span>      <span class="c1">#Fluid-related, kinematic viscosity [dynamic viscosity/fluid_density, m2/s]</span>
+<span class="linenos">15</span><span class="n">diffusion</span> <span class="o">=</span> <span class="mf">1e-12</span>     <span class="c1">#Fluid-related, diffusion coefficient for tracer [m2/s]</span>
+<span class="linenos">16</span><span class="n">inletLocation</span> <span class="o">=</span> <span class="s2">&quot;top&quot;</span> <span class="c1">#Simulation-related, inlet bc location (left, top, right, or bottom)</span>
+<span class="linenos">17</span><span class="n">inletValue</span> <span class="o">=</span> <span class="mf">2.0e-3</span>   <span class="c1">#Simulation-related, inlet boundary condition (pressure/fluid_density, [Pa/(kg/m3)])</span>
+<span class="linenos">18</span><span class="n">tracerTime</span> <span class="o">=</span> <span class="mi">120</span>      <span class="c1">#Simulation-related, end time for the tracer simulation [s]</span>
+<span class="linenos">19</span><span class="n">tracerWrite</span> <span class="o">=</span> <span class="mi">1</span>       <span class="c1">#Simulation-related, time interval to write the tracer results [s]</span>
+<span class="linenos">20</span><span class="n">pressureConv</span> <span class="o">=</span> <span class="mf">1e-7</span>   <span class="c1">#Solver-related, convergence criterium for the pressure solution in the numerical scheme for the Stokes simulation</span>
+<span class="linenos">21</span><span class="n">velocityConv</span> <span class="o">=</span> <span class="mf">1e-8</span>   <span class="c1">#Solver-related, convergence criterium for the velocity solution in the numerical scheme for the Stokes simulation</span>
+<span class="linenos">22</span><span class="n">iterationsMax</span> <span class="o">=</span> <span class="mi">10000</span> <span class="c1">#Solver-related, maximum number of iterations for the Stokes simulation in case the convergence criteria have not been reached</span>
+<span class="linenos">23</span><span class="n">tracerStep</span> <span class="o">=</span> <span class="mi">1</span>        <span class="c1">#Solver-related, time step in the numerical scheme for the tracer simulation [s]</span>
 </pre></div>
 </div>
 <p>Here we used a version of Gmsh built from source, then we gave the path to the executable via the ‘-g’ flag.
 Since we are interested in the flow and tracer simulations, then we add the flag ‘-t all’.
 Then, the following command was exectued in the terminal:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pymm<span class="w"> </span>-i<span class="w"> </span>online.png<span class="w"> </span>-p<span class="w"> </span>configuration.txt<span class="w"> </span>-m<span class="w"> </span>device<span class="w"> </span>-t<span class="w"> </span>all<span class="w"> </span>-gmsh<span class="w"> </span>/home/AD.NORCERESEARCH.NO/dmar/Github/gmsh/build/gmsh
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pymm<span class="w"> </span>-i<span class="w"> </span>online.png<span class="w"> </span>-p<span class="w"> </span>configuration.toml<span class="w"> </span>-m<span class="w"> </span>device<span class="w"> </span>-t<span class="w"> </span>all<span class="w"> </span>-gmsh<span class="w"> </span>/home/AD.NORCERESEARCH.NO/dmar/Github/gmsh/build/gmsh
 </pre></div>
 </div>
 <p>The execution time was ca. 15 minutes and the following are screenshots of the simulation results:</p>

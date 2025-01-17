@@ -2,7 +2,7 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Version:  11
+    \\  /    A nd           | Version:  12
      \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
 FoamFile
@@ -24,13 +24,13 @@ startTime       0;
 
 stopAt          endTime;
 
-endTime         ${dic['f_maxI']};
+endTime         ${dic['iterationsMax']};
 
 deltaT          1;
 
 writeControl    timeStep;
 
-writeInterval   ${dic['f_maxI']};
+writeInterval   ${dic['iterationsMax']};
 
 purgeWrite      0;
 

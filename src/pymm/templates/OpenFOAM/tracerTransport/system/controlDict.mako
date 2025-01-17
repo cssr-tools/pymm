@@ -2,7 +2,7 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Version:  11
+    \\  /    A nd           | Version:  12
      \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
 FoamFile
@@ -28,13 +28,13 @@ subSolverTime   0;
 
 stopAt          endTime;
 
-endTime         ${dic['t_et']};
+endTime         ${dic['tracerTime']};
 
-deltaT          ${dic['t_dt']};
+deltaT          ${dic['tracerStep']};
 
 writeControl    runTime;
 
-writeInterval   ${dic['t_wi']};
+writeInterval   ${dic['tracerWrite']};
 
 purgeWrite      0;
 
@@ -52,7 +52,7 @@ runTimeModifiable true;
 
 functions
 {
-    #includeFunc scalarTransport(T, diffusivity=constant, D = ${dic['D']})
+    #includeFunc scalarTransport(T, diffusivity=constant, D = ${dic['diffusion']})
 }
 
 // ************************************************************************* //

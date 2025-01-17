@@ -13,6 +13,6 @@ The simulation results are saved in the VTK_flowSTokes and VTK_tracerTransport f
 `paraview <https://www.paraview.orgs>`_ is used for the visualization.
 Then after running **pymm**, one could modify the generated OpenFOAM related files and 
 run directly the simulations calling the OpenFOAM solvers, e.g., to change additional 
-tolerances that are not currently included in the parameters.txt file and/or to change 
+tolerances that are not currently included in the parameters.toml file and/or to change 
 the numerical schemes (see the OpenFOAM documentation 
 `here <https://www.openfoam.com/documentation/user-guide/6-solving/6.2-numerical-schemes>`_).

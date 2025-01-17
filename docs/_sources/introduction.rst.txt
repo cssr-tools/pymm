@@ -24,13 +24,13 @@ The current implementation supports the following executable with the argument o
 
 .. code-block:: bash
 
-    pymm -i image.png -p configuration_file.txt -o output -m image -t all -g gmsh
+    pymm -i image.png -p parameters.toml -o output -m image -t all -g gmsh
 
 where 
 
 - \-i, \-image: The base name of the image ('microsystem.png' by default).
-- \-p, \-parameters: The base name of the :doc:`configuration file <./configuration_file>` ('parameters.txt' by default).
+- \-p, \-parameters: The base name of the :doc:`configuration file <./configuration_file>` ('parameters.toml' by default).
 - \-m, \-mode: The configuration of the microsystem, currently only image and device supported ('image' by default).
-- \-t, \-type: Run the whole framework ('all'), only the mesh part ('mesh'), keep the current mesh and only the flow ('flow'), flow and tracer ('flowntracer'), or only tracer ('tracer') ('mesh' by default).
+- \-t, \-type: Run the whole framework ('all'), only the generation of the PNG figures, with the segmentation to grains, voids, and boundary ('pngs'), the mesh files for Gmsh ('mesh'), keep the current mesh and only simulate the flow velocity field ('flow'), mesh and flow ('mesh_flow'), flow and tracer ('flow_tracer'), or only tracer simulations ('tracer') ('mesh' by default).
 - \-o, \-output: The base name of the :doc:`output folder <./output_folder>` ('output' by default).
 - \-g, \-gmsh: The full path to the Gmsh executable or simple 'gmsh' if it runs from the terminal ('gmsh' by default).

@@ -2,7 +2,7 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Version:  11
+    \\  /    A nd           | Version:  12
      \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
 FoamFile
@@ -39,8 +39,8 @@ SIMPLE
     consistent  yes;
     residualControl
     {
-        p               ${dic['p_tol']};
-        U               ${dic['u_tol']};
+        p               ${dic['pressureConv']};
+        U               ${dic['velocityConv']};
     }
 }
 
