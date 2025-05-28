@@ -54,4 +54,5 @@ See the `Gmsh page <https://gmsh.info/#Download>`_.
 .. tip::
 
     See the `CI.yml <https://github.com/cssr-tools/pymm/blob/main/.github/workflows/CI.yml>`_ script 
-    for installation of pymm in Ubuntu using Python3.13. 
+    for installation of pymm in Ubuntu using Python3.13. Using Python3.13 requires to install a higher version
+    of scikit-image by executing **pip install scikit-image==0.25.2**.
