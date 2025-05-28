@@ -83,8 +83,135 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="pymm-core-pymm-module">
-<h1>pymm.core.pymm module<a class="headerlink" href="#pymm-core-pymm-module" title="Link to this heading"></a></h1>
+  <section id="module-pymm.core.pymm">
+<span id="pymm-core-pymm-module"></span><h1>pymm.core.pymm module<a class="headerlink" href="#module-pymm.core.pymm" title="Link to this heading"></a></h1>
+<p>Main script for pymm</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pymm.core.pymm.boundary_tags_left_bottom">
+<span class="sig-prename descclassname"><span class="pre">pymm.core.pymm.</span></span><span class="sig-name descname"><span class="pre">boundary_tags_left_bottom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymm.core.pymm.boundary_tags_left_bottom" title="Link to this definition"></a></dt>
+<dd><p>Function to identify the wall, left, and bottom boundary tags</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dic (dict): Global dictionary with required parameters</p>
+</dd>
+<dt>Returns:</dt><dd><p>dic (dict): Global dictionary with new added parameters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pymm.core.pymm.boundary_tags_right_top">
+<span class="sig-prename descclassname"><span class="pre">pymm.core.pymm.</span></span><span class="sig-name descname"><span class="pre">boundary_tags_right_top</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymm.core.pymm.boundary_tags_right_top" title="Link to this definition"></a></dt>
+<dd><p>Function to identify the wall, right, and top boundary tags</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dic (dict): Global dictionary with required parameters</p>
+</dd>
+<dt>Returns:</dt><dd><p>dic (dict): Global dictionary with new added parameters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pymm.core.pymm.extract_borders">
+<span class="sig-prename descclassname"><span class="pre">pymm.core.pymm.</span></span><span class="sig-name descname"><span class="pre">extract_borders</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymm.core.pymm.extract_borders" title="Link to this definition"></a></dt>
+<dd><p>Function to extract the borders of the image</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dic (dict): Global dictionary with required parameters</p>
+</dd>
+<dt>Returns:</dt><dd><p>dic (dict): Global dictionary with new added parameters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pymm.core.pymm.identify_cells">
+<span class="sig-prename descclassname"><span class="pre">pymm.core.pymm.</span></span><span class="sig-name descname"><span class="pre">identify_cells</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymm.core.pymm.identify_cells" title="Link to this definition"></a></dt>
+<dd><p>Function to extract the cell locations on the borders</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dic (dict): Global dictionary with required parameters</p>
+</dd>
+<dt>Returns:</dt><dd><p>dic (dict): Global dictionary with new added parameters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pymm.core.pymm.main">
+<span class="sig-prename descclassname"><span class="pre">pymm.core.pymm.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymm.core.pymm.main" title="Link to this definition"></a></dt>
+<dd><p>Main function</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pymm.core.pymm.make_figures">
+<span class="sig-prename descclassname"><span class="pre">pymm.core.pymm.</span></span><span class="sig-name descname"><span class="pre">make_figures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymm.core.pymm.make_figures" title="Link to this definition"></a></dt>
+<dd><p>Function to make figures with the extract grains and contours</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dic (dict): Global dictionary with required parameters</p>
+</dd>
+<dt>Returns:</dt><dd><p>dic (dict): Global dictionary with new added parameters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pymm.core.pymm.pad_with">
+<span class="sig-prename descclassname"><span class="pre">pymm.core.pymm.</span></span><span class="sig-name descname"><span class="pre">pad_with</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_iaxis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymm.core.pymm.pad_with" title="Link to this definition"></a></dt>
+<dd><p>Function to add extra border to later extract the image boundaries
+see <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.pad.html">https://numpy.org/doc/stable/reference/generated/numpy.pad.html</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pymm.core.pymm.process_image">
+<span class="sig-prename descclassname"><span class="pre">pymm.core.pymm.</span></span><span class="sig-name descname"><span class="pre">process_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymm.core.pymm.process_image" title="Link to this definition"></a></dt>
+<dd><p>Function to process the input image</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dic (dict): Global dictionary with required parameters
+in_image (str): Name of the input image data</p>
+</dd>
+<dt>Returns:</dt><dd><p>dic (dict): Global dictionary with new added parameters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pymm.core.pymm.pymm">
+<span class="sig-prename descclassname"><span class="pre">pymm.core.pymm.</span></span><span class="sig-name descname"><span class="pre">pymm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymm.core.pymm.pymm" title="Link to this definition"></a></dt>
+<dd><p>Python for microsystems</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pymm.core.pymm.run_stokes">
+<span class="sig-prename descclassname"><span class="pre">pymm.core.pymm.</span></span><span class="sig-name descname"><span class="pre">run_stokes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymm.core.pymm.run_stokes" title="Link to this definition"></a></dt>
+<dd><p>Function to write the openFOAM files to run the Navier-Stokes flow simulations</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dic (dict): Global dictionary with required parameters</p>
+</dd>
+<dt>Returns:</dt><dd><p>dic (dict): Global dictionary with new added parameters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pymm.core.pymm.run_tracer">
+<span class="sig-prename descclassname"><span class="pre">pymm.core.pymm.</span></span><span class="sig-name descname"><span class="pre">run_tracer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymm.core.pymm.run_tracer" title="Link to this definition"></a></dt>
+<dd><p>Function to write the openFOAM files to run the Tracer flow simulations</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dic (dict): Global dictionary with required parameters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pymm.core.pymm.write_geo">
+<span class="sig-prename descclassname"><span class="pre">pymm.core.pymm.</span></span><span class="sig-name descname"><span class="pre">write_geo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymm.core.pymm.write_geo" title="Link to this definition"></a></dt>
+<dd><p>Function to write the Gmsh .geo file</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dic (dict): Global dictionary with required parameters</p>
+</dd>
+<dt>Returns:</dt><dd><p>dic (dict): Global dictionary with new added parameters</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
