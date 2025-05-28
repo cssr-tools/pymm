@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2025 NORCE
 # SPDX-License-Identifier: GPL-3.0
-# pylint: disable=R0912,R0915
+# pylint: disable=R0912,R0915,E1102
 
 """Main script for pymm"""
 
@@ -14,6 +14,7 @@ import porespy as ps
 import skimage.transform
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+from alive_progress import alive_bar
 from skimage import io, measure
 from mako.template import Template
 
@@ -66,14 +67,13 @@ def pymm():
         "terminal ('gmsh' by default).",
     )
     cmdargs = vars(parser.parse_known_args()[0])
-    dic = {"fol": cmdargs["output"]}  # Name for the output folder
+    dic = {"fol": os.path.abspath(cmdargs["output"].strip())}  # Name for output folder
     dic["gmsh_path"] = cmdargs["gmsh"]  # Command to execute gmsh
     dic["wtr"] = cmdargs["type"]  # Parts of the workflow to run
     dic["mode"] = cmdargs["mode"]  # Configuration of the microsystem
     dic["pat"] = os.path.dirname(__file__)[:-5]  # Path to the pyff folder
-    dic["cwd"] = os.getcwd()  # Path to the folder of the parameters.txt file
     # Read the input values
-    if not os.path.exists(f"{dic['cwd']}/{cmdargs['parameters']}"):
+    if not os.path.exists(cmdargs["parameters"]):
         print(f"The file {cmdargs['parameters']} is not found.")
         sys.exit()
     if cmdargs["parameters"].split(".")[-1] == "txt":
@@ -81,6 +81,7 @@ def pymm():
         sys.exit()
     with open(cmdargs["parameters"], "rb") as file:
         dic.update(tomllib.load(file))
+    print("\nExecuting pymm, please wait.")
     if dic["wtr"] in ["all", "pngs", "mesh", "mesh_flow"]:
         # Generate the image
         process_image(dic, cmdargs["image"])
@@ -110,17 +111,21 @@ def pymm():
             # Write the .geo file
             write_geo(dic)
     if dic["wtr"] in ["all", "mesh_flow", "flow", "flow_tracer"]:
-        # Setting up of the files for the Flow simulations and run it
-        if not os.path.exists(f"{dic['cwd']}/{dic['fol']}/mesh.msh"):
+        # Set up of the files for the Flow simulations and run them
+        if not os.path.exists(f"{dic['fol']}/mesh.msh"):
             print("Run first either -t all or -t mesh.")
             sys.exit()
         run_stokes(dic)
     if dic["wtr"] in ["all", "flow_tracer", "tracer"]:
-        if not os.path.exists(f"{dic['cwd']}/{dic['fol']}/OpenFOAM/flowStokes"):
+        if not os.path.exists(f"{dic['fol']}/OpenFOAM/flowStokes"):
             print("Run first either -t all or -t mesh_flow.")
             sys.exit()
-        # Setting up of the files for the Tracer simulations and run it
+        # Set up of the files for the Tracer simulations and run them
         run_tracer(dic)
+    print(
+        "\nThe execution of pymm succeeded. "
+        + f"The generated files have been written to {dic['fol']}\n"
+    )
 
 
 def process_image(dic, in_image):
@@ -161,8 +166,8 @@ def process_image(dic, in_image):
     dic["im"] = np.pad(dic["im"], dic["ad_bord"], pad_with, padder=1)
 
     # Save the binary image for visualization
-    if not os.path.exists(f"{dic['cwd']}/{dic['fol']}"):
-        os.system(f"mkdir {dic['cwd']}/{dic['fol']}")
+    if not os.path.exists(f"{dic['fol']}"):
+        os.system(f"mkdir {dic['fol']}")
     ps.visualization.set_mpl_style()
     fig, axis = plt.subplots()
     axis.imshow(
@@ -172,7 +177,7 @@ def process_image(dic, in_image):
     axis.axis("image")
     axis.set_xticks([])
     axis.set_yticks([])
-    fig.savefig(f"{dic['cwd']}/{dic['fol']}/binary_image.png", dpi=600)
+    fig.savefig(f"{dic['fol']}/binary_image.png", dpi=600)
     # Extract the contour of the grains on the image border and interior
     dic["border"] = ps.filters.trim_small_clusters(
         dic["im"], size=(dic["imH"] + 2 * dic["imL"]) * dic["ad_bord"]
@@ -227,7 +232,7 @@ def make_figures(dic):
     axis.axis("image")
     axis.set_xticks([])
     axis.set_yticks([])
-    fig.savefig(f"{dic['cwd']}/{dic['fol']}/extracted_border.png", dpi=600)
+    fig.savefig(f"{dic['fol']}/extracted_border.png", dpi=600)
 
     # Save the interior grains
     fig, axis = plt.subplots()
@@ -243,7 +248,7 @@ def make_figures(dic):
     axis.axis("image")
     axis.set_xticks([])
     axis.set_yticks([])
-    fig.savefig(f"{dic['cwd']}/{dic['fol']}/interior_grains.png", dpi=600)
+    fig.savefig(f"{dic['fol']}/interior_grains.png", dpi=600)
 
     # Save the extracted border + interior grains
     fig, axis = plt.subplots()
@@ -264,7 +269,7 @@ def make_figures(dic):
     axis.axis("image")
     axis.set_xticks([])
     axis.set_yticks([])
-    fig.savefig(f"{dic['cwd']}/{dic['fol']}/interior_grains_border.png", dpi=600)
+    fig.savefig(f"{dic['fol']}/interior_grains_border.png", dpi=600)
 
 
 def extract_borders(dic):
@@ -463,38 +468,36 @@ def write_geo(dic):
     mytemplate = Template(filename=f"{dic['pat']}/templates/grid/{dic['mode']}.mako")
     var = {"dic": dic}
     filled_template = mytemplate.render(**var)
-    with open(f"{dic['cwd']}/{dic['fol']}/mesh.geo", "w", encoding="utf8") as file:
+    with open(f"{dic['fol']}/mesh.geo", "w", encoding="utf8") as file:
         file.write(filled_template)
-    for contour in dic["cn_grains"]:
-        contour = measure.approximate_polygon(contour, tolerance=dic["grainsTol"])
-        if len(contour) > 3:
-            with open(
-                f"{dic['cwd']}/{dic['fol']}/mesh.geo", "r", encoding="utf8"
-            ) as file:
-                dic["geo"] = file.readlines()
-            dic["p"] = []
-            dic["ng"] = 0
-            for k in enumerate(dic["geo"]):
-                if dic["geo"][k[0]][:5] == "Plane":
-                    dic["l1"] = k[0]
-                if dic["geo"][k[0]][-6:-1] == "= hs;":
-                    dic["ng"] += 1
-                if dic["geo"][k[0]][:6] == "Mesh 3":
-                    dic["lf"] = k[0]
-            for i in range(len(contour) - 1):
-                dic["p"].append([contour[i, 1], contour[i, 0]])
+    with alive_bar(len(dic["cn_grains"])) as bar_animation:
+        for contour in dic["cn_grains"]:
+            bar_animation()
+            contour = measure.approximate_polygon(contour, tolerance=dic["grainsTol"])
+            if len(contour) > 3:
+                with open(f"{dic['fol']}/mesh.geo", "r", encoding="utf8") as file:
+                    dic["geo"] = file.readlines()
+                dic["p"] = []
+                dic["ng"] = 0
+                for k in enumerate(dic["geo"]):
+                    if dic["geo"][k[0]][:5] == "Plane":
+                        dic["l1"] = k[0]
+                    if dic["geo"][k[0]][-6:-1] == "= hs;":
+                        dic["ng"] += 1
+                    if dic["geo"][k[0]][:6] == "Mesh 3":
+                        dic["lf"] = k[0]
+                for i in range(len(contour) - 1):
+                    dic["p"].append([contour[i, 1], contour[i, 0]])
 
-            # Update the .geo file adding a new grain
-            mytemplate = Template(
-                filename=f"{dic['pat']}/templates/utils/add_grain.mako"
-            )
-            var = {"dic": dic}
-            filled_template = mytemplate.render(**var)
-            with open(
-                f"{dic['cwd']}/{dic['fol']}/mesh.geo", "w", encoding="utf8"
-            ) as file:
-                file.write(filled_template)
-    os.system(f"{dic['gmsh_path']} {dic['cwd']}/{dic['fol']}/mesh.geo -3 & wait")
+                # Update the .geo file adding a new grain
+                mytemplate = Template(
+                    filename=f"{dic['pat']}/templates/utils/add_grain.mako"
+                )
+                var = {"dic": dic}
+                filled_template = mytemplate.render(**var)
+                with open(f"{dic['fol']}/mesh.geo", "w", encoding="utf8") as file:
+                    file.write(filled_template)
+    os.system(f"{dic['gmsh_path']} {dic['fol']}/mesh.geo -3 & wait")
 
 
 def run_stokes(dic):
@@ -508,14 +511,14 @@ def run_stokes(dic):
         dic (dict): Global dictionary with new added parameters
     """
     var = {"dic": dic}
-    if not os.path.exists(f"{dic['cwd']}/{dic['fol']}/OpenFOAM"):
-        os.system(f"mkdir {dic['cwd']}/{dic['fol']}/OpenFOAM")
+    if not os.path.exists(f"{dic['fol']}/OpenFOAM"):
+        os.system(f"mkdir {dic['fol']}/OpenFOAM")
     for name in ["OpenFOAM/flowStokes", "VTK_flowStokes"]:
-        if os.path.exists(f"{dic['cwd']}/{dic['fol']}/{name}"):
-            os.system(f"rm -rf {dic['cwd']}/{dic['fol']}/{name}")
-        os.system(f"mkdir {dic['cwd']}/{dic['fol']}/{name}")
+        if os.path.exists(f"{dic['fol']}/{name}"):
+            os.system(f"rm -rf {dic['fol']}/{name}")
+        os.system(f"mkdir {dic['fol']}/{name}")
     for name in ["0", "constant", "system"]:
-        os.system(f"mkdir {dic['cwd']}/{dic['fol']}/OpenFOAM/flowStokes/{name}")
+        os.system(f"mkdir {dic['fol']}/OpenFOAM/flowStokes/{name}")
     for file in [
         "0/p",
         "0/U",
@@ -530,15 +533,13 @@ def run_stokes(dic):
         )
         filled_template = mytemplate.render(**var)
         with open(
-            f"{dic['cwd']}/{dic['fol']}/OpenFOAM/flowStokes/{file}",
+            f"{dic['fol']}/OpenFOAM/flowStokes/{file}",
             "w",
             encoding="utf8",
         ) as file:
             file.write(filled_template)
-    os.system(
-        f"cp {dic['cwd']}/{dic['fol']}/mesh.msh {dic['cwd']}/{dic['fol']}/OpenFOAM/flowStokes"
-    )
-    os.chdir(f"{dic['cwd']}/{dic['fol']}/OpenFOAM/flowStokes")
+    os.system(f"cp {dic['fol']}/mesh.msh {dic['fol']}/OpenFOAM/flowStokes")
+    os.chdir(f"{dic['fol']}/OpenFOAM/flowStokes")
     os.system("gmshToFoam mesh.msh & wait")
 
     with open("constant/polyMesh/boundary", "r", encoding="utf8") as file:
@@ -553,7 +554,7 @@ def run_stokes(dic):
     # Running the steady-state flow simulation
     os.system("foamRun -solver incompressibleFluid & wait")
     os.system("foamToVTK & wait")
-    os.system(f"cp -r VTK/* {dic['cwd']}/{dic['fol']}/VTK_flowStokes")
+    os.system(f"cp -r VTK/* {dic['fol']}/VTK_flowStokes")
 
 
 def run_tracer(dic):
@@ -563,13 +564,12 @@ def run_tracer(dic):
     Args:
         dic (dict): Global dictionary with required parameters
     """
-    os.chdir(f"{dic['cwd']}")
     for name in ["VTK_tracerTransport", "OpenFOAM/tracerTransport"]:
-        if os.path.exists(f"{dic['cwd']}/{dic['fol']}/{name}"):
-            os.system(f"rm -rf {dic['cwd']}/{dic['fol']}/{name}")
-        os.system(f"mkdir {dic['cwd']}/{dic['fol']}/{name}")
+        if os.path.exists(f"{dic['fol']}/{name}"):
+            os.system(f"rm -rf {dic['fol']}/{name}")
+        os.system(f"mkdir {dic['fol']}/{name}")
     for name in ["0", "constant", "system"]:
-        os.system(f"mkdir {dic['cwd']}/{dic['fol']}/OpenFOAM/tracerTransport/{name}")
+        os.system(f"mkdir {dic['fol']}/OpenFOAM/tracerTransport/{name}")
     var = {"dic": dic}
     for file in [
         "0/T",
@@ -586,32 +586,28 @@ def run_tracer(dic):
         )
         filled_template = mytemplate.render(**var)
         with open(
-            f"{dic['cwd']}/{dic['fol']}/OpenFOAM/tracerTransport/{file}",
+            f"{dic['fol']}/OpenFOAM/tracerTransport/{file}",
             "w",
             encoding="utf8",
         ) as file:
             file.write(filled_template)
-    os.chdir(f"{dic['cwd']}/{dic['fol']}/OpenFOAM/flowStokes")
-    list_of_folders = glob.glob(f"{dic['cwd']}/{dic['fol']}/OpenFOAM/flowStokes/*/")
+    os.chdir(f"{dic['fol']}/OpenFOAM/flowStokes")
+    list_of_folders = glob.glob(f"{dic['fol']}/OpenFOAM/flowStokes/*/")
     list_of_folders.remove(max(list_of_folders, key=os.path.getctime))
     latest_folder = max(list_of_folders, key=os.path.getctime)
+    os.system(f"cp {latest_folder}U {dic['fol']}/OpenFOAM/tracerTransport/0/")
+    os.system(f"cp {latest_folder}p {dic['fol']}/OpenFOAM/tracerTransport/0/")
     os.system(
-        f"cp {latest_folder}U {dic['cwd']}/{dic['fol']}/OpenFOAM/tracerTransport/0/"
+        f"cp -r {dic['fol']}/OpenFOAM/flowStokes/constant/polyMesh "
+        f"{dic['fol']}/OpenFOAM/tracerTransport/constant/"
     )
-    os.system(
-        f"cp {latest_folder}p {dic['cwd']}/{dic['fol']}/OpenFOAM/tracerTransport/0/"
-    )
-    os.system(
-        f"cp -r {dic['cwd']}/{dic['fol']}/OpenFOAM/flowStokes/constant/polyMesh "
-        f"{dic['cwd']}/{dic['fol']}/OpenFOAM/tracerTransport/constant/"
-    )
-    os.chdir(f"{dic['cwd']}/{dic['fol']}/OpenFOAM/tracerTransport")
+    os.chdir(f"{dic['fol']}/OpenFOAM/tracerTransport")
     os.system("topoSet & wait")
 
     # Running the simulation of tracer transport
     os.system("foamRun & wait")
     os.system("foamToVTK & wait")
-    os.system(f"cp -r VTK/* {dic['cwd']}/{dic['fol']}/VTK_tracerTransport")
+    os.system(f"cp -r VTK/* {dic['fol']}/VTK_tracerTransport")
 
 
 def main():

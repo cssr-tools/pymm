@@ -96,9 +96,8 @@ with the default name ‘microsystem.png’. The configuration file corresponds 
 <a class="reference internal" href="configuration_file.html"><span class="doc">configuration file</span></a> section and it is saved as ‘parameters.toml’
 (the default name for the configuration file). Since ‘image’ is the default entry for the simulation
 setup, and assuming that the command ‘gmsh’ in the terminal
-executes Gmsh, then to run the whole framework (meshing, flow, and tracer) it is enough to add the
-‘-t all’ command line to the pymm executable:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pymm<span class="w"> </span>-t<span class="w"> </span>all
+executes Gmsh, then to run the whole framework (meshing, flow, and tracer):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pymm<span class="w"> </span>-i<span class="w"> </span>microsystem.png<span class="w"> </span>-p<span class="w"> </span>parameters.toml<span class="w"> </span>-t<span class="w"> </span>all
 </pre></div>
 </div>
 <p>The execution time was ca. 20 minutes and the following are screenshots of the simulation results:</p>
