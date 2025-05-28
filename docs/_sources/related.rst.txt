@@ -2,7 +2,7 @@
 Related
 =======
 
-Below are some tools that might be of interest; check them out 🙂.
+Below are some tools that might be of interest; check 'em out 🙂.
 
 **********
 pyopmspe11
@@ -12,6 +12,15 @@ pyopmspe11
     :scale: 50%
 
 `A Python framework using OPM Flow for the CSP SPE11 benchmark project <https://github.com/OPM/pyopmspe11>`_.
+
+******
+pycopm
+******
+
+.. image:: ./figs/pycopm.png
+    :scale: 32%
+
+`An open-source tool to tailor OPM Flow geological models <https://github.com/cssr-tools/pycopm>`_.
 
 *****
 plopm
@@ -25,19 +34,10 @@ plopm
 pyopmnearwell
 *************
 
-.. image:: ./figs/pyopmnearwell.gif
-    :scale: 50%
-
-`A framework to simulate near well dynamics using OPM Flow <https://github.com/cssr-tools/pyopmnearwell>`_.
-
-******
-pycopm
-******
-
-.. image:: ./figs/pycopm.gif
+.. image:: ./figs/pyopmnearwell.png
     :scale: 60%
 
-`Simplified and flexible framework for coarsening geological models <https://github.com/cssr-tools/pycopm>`_.
+`A Python framework to simulate near well dynamics using OPM Flow <https://github.com/cssr-tools/pyopmnearwell>`_.
 
 ********
 expreccs

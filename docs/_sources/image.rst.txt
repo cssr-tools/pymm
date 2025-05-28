@@ -10,12 +10,11 @@ with the default name 'microsystem.png'. The configuration file corresponds to t
 :doc:`configuration file<./configuration_file>` section and it is saved as 'parameters.toml' 
 (the default name for the configuration file). Since 'image' is the default entry for the simulation
 setup, and assuming that the command 'gmsh' in the terminal 
-executes Gmsh, then to run the whole framework (meshing, flow, and tracer) it is enough to add the 
-'-t all' command line to the pymm executable:
+executes Gmsh, then to run the whole framework (meshing, flow, and tracer):
 
 .. code-block:: bash
 
-    pymm -t all
+    pymm -i microsystem.png -p parameters.toml -t all
 
 The execution time was ca. 20 minutes and the following are screenshots of the simulation results:
 

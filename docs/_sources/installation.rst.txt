@@ -2,7 +2,7 @@
 Installation
 ============
 
-The following steps work installing the dependencies in Linux via apt-get using Python3.12.
+The following steps work installing the dependencies in Linux via apt-get.
 While using package managers such as Anaconda, Miniforge, or Mamba might work, these are not tested.
 
 Python package
@@ -54,4 +54,5 @@ See the `Gmsh page <https://gmsh.info/#Download>`_.
 .. tip::
 
     See the `CI.yml <https://github.com/cssr-tools/pymm/blob/main/.github/workflows/CI.yml>`_ script 
-    for installation of pymm in Ubuntu using Python3.12. 
+    for installation of pymm in Ubuntu using Python3.13. Using Python3.13 requires to install a higher version
+    of scikit-image by executing **pip install scikit-image==0.25.2**.

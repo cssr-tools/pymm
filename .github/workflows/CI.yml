@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.12']
+        python-version: ['3.13']
         os: [ubuntu-latest]
         
     runs-on: ${{ matrix.os }}
@@ -40,6 +40,7 @@ jobs:
     - name: Install pymm
       run: |
         pip install .
+        pip install scikit-image==0.25.2
 
     - name: Check code style and linting 
       run: |
