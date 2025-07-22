@@ -115,6 +115,11 @@ install the Python requirements in a virtual environment with the following comm
 <span class="go">pip install -r dev-requirements.txt</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>While with Python3.12 the previous lines should install all required Python packages with the correct versions,
+using Python3.13 requires to install a higher version of scikit-image, this by executing <strong>pip install scikit-image==0.25.2</strong> after the previous lines.</p>
+</div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Typing <strong>git tag -l</strong> writes all available specific versions.</p>
@@ -122,7 +127,12 @@ install the Python requirements in a virtual environment with the following comm
 </section>
 <section id="openfoam">
 <h2>OpenFOAM<a class="headerlink" href="#openfoam" title="Link to this heading"></a></h2>
-<p>See the <a class="reference external" href="https://openfoam.org/download/12-ubuntu/">OpenFOAM page</a>, where from OpenFOAM-12 the simulator is available via apt get.</p>
+<p>See the <a class="reference external" href="https://openfoam.org/download/13-ubuntu/">OpenFOAM page</a>, where from OpenFOAM-12 the simulator is available via apt get,
+and OpenFOAM-13 is the latest release. To test if OpenFoam is installed and working, you could type in the terminal:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">. /opt/openfoam13/etc/bashrc</span>
+<span class="go">foamRun -help</span>
+</pre></div>
+</div>
 </section>
 <section id="gmsh">
 <h2>Gmsh<a class="headerlink" href="#gmsh" title="Link to this heading"></a></h2>
@@ -130,7 +140,7 @@ install the Python requirements in a virtual environment with the following comm
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>See the <a class="reference external" href="https://github.com/cssr-tools/pymm/blob/main/.github/workflows/CI.yml">CI.yml</a> script
-for installation of pymm in Ubuntu using Python3.13. Using Python3.13 requires to install a higher version of scikit-image by executing <strong>pip install scikit-image==0.25.2</strong>.</p>
+for installation of pymm in Ubuntu using Python3.13.</p>
 </div>
 </section>
 </section>
@@ -146,7 +156,7 @@ for installation of pymm in Ubuntu using Python3.13. Using Python3.13 requires t
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, NORCE Norwegian Research Centre AS.</p>
+    <p>&#169; Copyright 2022-2025, NORCE Research AS.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
