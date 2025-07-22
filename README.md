@@ -13,8 +13,8 @@ Creation of [_OpenFOAM_](https://www.openfoam.com) simulation models from given 
 
 ## Installation
 You will first need to install
-* OpenFOAM (https://www.openfoam.com) (tested with OpenFOAM-12)
-* Gmsh (https://gmsh.info) (tested with Gmsh 4.13.1)
+* OpenFOAM (https://www.openfoam.com) (tested with OpenFOAM-13)
+* Gmsh (https://gmsh.info) (tested with Gmsh 4.14.0)
 
 To install the _pymm_ executable from the development version: 
 
@@ -43,7 +43,7 @@ pip install -e .
 pip install -r dev-requirements.txt
 ```
 
-See the [_OpenFOAM page_](https://openfoam.org/download/12-ubuntu/), where from OpenFOAM-12 the simulator is available via apt get. 
+See the [_OpenFOAM page_](https://openfoam.org/download/13-ubuntu/), where from OpenFOAM-12 the simulator is available via apt get. 
 
 ## Running pymm
 You can run _pymm_ as a single command line:
@@ -65,6 +65,6 @@ The following is a list of journal papers in which _pymm_ is used:
 1. Liu, N., Haugen, M., Benali, B., Landa-Marbán, D., Fernø, M.A., 2023. Pore-scale kinetics of calcium dissolution and secondary precipitation during geological carbon storage. Chem. Geol. 641, 121782. https://doi.org/10.1016/j.chemgeo.2023.121782.
 
 ## About pymm
-_pymm_, an image-based Python package for computational fluid dynamics, is funded by [_Center for Sustainable Subsurface Resources_](https://cssr.no) [project no. 331841] and [_NORCE Norwegian Research Centre As_](https://www.norceresearch.no) [project number 101070]. 
+_pymm_, an image-based Python package for computational fluid dynamics, is funded by [_Center for Sustainable Subsurface Resources_](https://cssr.no) [project no. 331841] and [_NORCE Research As_](https://www.norceresearch.no) [project number 101070]. 
 Contributions are more than welcome using the fork and pull request approach.
 For a new feature, please request this by raising an issue.

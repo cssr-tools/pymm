@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2025 NORCE
+# SPDX-FileCopyrightText: 2022-2025 NORCE Research AS
 # SPDX-License-Identifier: GPL-3.0
 # pylint: disable=R0912,R0915,E1102
 
@@ -89,17 +89,13 @@ def pymm():
         extract_borders(dic)
         if dic["wtr"] in ["all", "mesh", "mesh_flow"]:
             if dic["inletLocation"].lower() == "left":
-                dic["inlet"] = "L"
-                dic["outlet"] = "R"
+                dic["inlet"], dic["outlet"] = "L", "R"
             elif dic["inletLocation"].lower() == "top":
-                dic["inlet"] = "T"
-                dic["outlet"] = "B"
+                dic["inlet"], dic["outlet"] = "T", "B"
             elif dic["inletLocation"].lower() == "right":
-                dic["inlet"] = "R"
-                dic["outlet"] = "L"
+                dic["inlet"], dic["outlet"] = "R", "L"
             elif dic["inletLocation"].lower() == "bottom":
-                dic["inlet"] = "B"
-                dic["outlet"] = "T"
+                dic["inlet"], dic["outlet"] = "B", "T"
             else:
                 print(f"Invalid inletLocation {dic['inletLocation']}.")
                 sys.exit()
@@ -158,8 +154,7 @@ def process_image(dic, in_image):
         dic["im"].append(imbr)
     dic["im"] = np.array(dic["im"])
     dic["im"] = skimage.transform.rescale(dic["im"], dic["rescale"])
-    dic["imH"] = dic["im"].shape[0]
-    dic["imL"] = dic["im"].shape[1]
+    dic["imH"], dic["imL"] = dic["im"].shape[0], dic["im"].shape[1]
 
     # Add arbitrary border to extract the image boundaries
     dic["ad_bord"] = 50
@@ -282,13 +277,8 @@ def extract_borders(dic):
     Returns:
         dic (dict): Global dictionary with new added parameters
     """
-    dic["pl"] = []
-    dic["pb"] = []
-    dic["pr"] = []
-    dic["pt"] = []
-    dic["aa"] = 0
-    dic["dd"] = 0
-    dic["cc"] = 0
+    dic["pl"], dic["pb"], dic["pr"], dic["pt"] = [], [], [], []
+    dic["aa"], dic["dd"], dic["cc"] = 0, 0, 0
     dic["bb"] = min(dic["bnd"][:, 0])
     dic["bl"] = min(dic["bnd"][:, 1])
     dic["bt"] = max(dic["bnd"][:, 0])
@@ -356,33 +346,13 @@ def identify_cells(dic):
     """
     dic["point"] = []
     for i in range(len(dic["pl"])):
-        dic["point"].append(
-            [
-                dic["pl"][i][0],
-                dic["pl"][i][1],
-            ]
-        )
+        dic["point"].append([dic["pl"][i][0], dic["pl"][i][1]])
     for i in range(len(dic["pt"]) - 1):
-        dic["point"].append(
-            [
-                dic["pt"][i + 1][0],
-                dic["pt"][i + 1][1],
-            ]
-        )
+        dic["point"].append([dic["pt"][i + 1][0], dic["pt"][i + 1][1]])
     for i in range(len(dic["pr"])):
-        dic["point"].append(
-            [
-                dic["pr"][i][0],
-                dic["pr"][i][1],
-            ]
-        )
+        dic["point"].append([dic["pr"][i][0], dic["pr"][i][1]])
     for i in range(len(dic["pb"])):
-        dic["point"].append(
-            [
-                dic["pb"][i][0],
-                dic["pb"][i][1],
-            ]
-        )
+        dic["point"].append([dic["pb"][i][0], dic["pb"][i][1]])
     dic["point"].append(dic["point"][0])
 
 
@@ -396,9 +366,7 @@ def boundary_tags_left_bottom(dic):
     Returns:
         dic (dict): Global dictionary with new added parameters
     """
-    dic["bdnL"] = []
-    dic["bdnT"] = []
-    dic["wall"] = []
+    dic["bdnL"], dic["bdnT"], dic["wall"] = [], [], []
     dic["j"] = 0
     for _ in range(len(dic["pl"]) - 1):
         if (
@@ -430,8 +398,7 @@ def boundary_tags_right_top(dic):
     Returns:
         dic (dict): Global dictionary with new added parameters
     """
-    dic["bdnR"] = []
-    dic["bdnB"] = []
+    dic["bdnR"], dic["bdnB"] = [], []
     for _ in range(len(dic["pr"])):
         if (
             abs(dic["br"] - dic["ad_bord"] - dic["point"][dic["j"]][0]) < 1
@@ -467,36 +434,34 @@ def write_geo(dic):
     """
     mytemplate = Template(filename=f"{dic['pat']}/templates/grid/{dic['mode']}.mako")
     var = {"dic": dic}
-    filled_template = mytemplate.render(**var)
-    with open(f"{dic['fol']}/mesh.geo", "w", encoding="utf8") as file:
-        file.write(filled_template)
+    dic["geo"] = mytemplate.render(**var).split("\n")
+    tmp, nog = "", 0
+    for i, row in enumerate(dic["geo"]):
+        if row[:5] == "Plane":
+            nol = i
+            break
     with alive_bar(len(dic["cn_grains"])) as bar_animation:
         for contour in dic["cn_grains"]:
             bar_animation()
             contour = measure.approximate_polygon(contour, tolerance=dic["grainsTol"])
+            points = []
             if len(contour) > 3:
-                with open(f"{dic['fol']}/mesh.geo", "r", encoding="utf8") as file:
-                    dic["geo"] = file.readlines()
-                dic["p"] = []
-                dic["ng"] = 0
-                for k in enumerate(dic["geo"]):
-                    if dic["geo"][k[0]][:5] == "Plane":
-                        dic["l1"] = k[0]
-                    if dic["geo"][k[0]][-6:-1] == "= hs;":
-                        dic["ng"] += 1
-                    if dic["geo"][k[0]][:6] == "Mesh 3":
-                        dic["lf"] = k[0]
                 for i in range(len(contour) - 1):
-                    dic["p"].append([contour[i, 1], contour[i, 0]])
-
-                # Update the .geo file adding a new grain
-                mytemplate = Template(
-                    filename=f"{dic['pat']}/templates/utils/add_grain.mako"
+                    points.append([contour[i, 1], contour[i, 0]])
+            if len(points) > 0:
+                nog += 1
+                tmp += f'Tp[] = Point "*";\nh({nog}) = hs\n;'
+                for i, point in enumerate(points):
+                    tmp += f"Point(#Tp[]+{i+1}) = {{(rL/L)*{point[0]}, "
+                    tmp += f"{point[1]}*rH/H, 0, h({nog})}};\n"
+                tmp += 'Tp1[] = Point "*";\nFor i In {#Tp[]+1 : #Tp1[] - 1}\n'
+                tmp += (
+                    "  Line(i)={i, i + 1};\nEndFor\nLine(#Tp1[])={#Tp1[], #Tp[]+1};\n"
                 )
-                var = {"dic": dic}
-                filled_template = mytemplate.render(**var)
-                with open(f"{dic['fol']}/mesh.geo", "w", encoding="utf8") as file:
-                    file.write(filled_template)
+                tmp += "Line Loop(1+n+1)={#Tp[]+1: #Tp1[]};\nn = n+1;\n"
+    dic["geo"] = dic["geo"][:nol] + tmp.split("\n") + dic["geo"][nol:]
+    with open(f"{dic['fol']}/mesh.geo", "w", encoding="utf8") as file:
+        file.write("\n".join(dic["geo"]))
     os.system(f"{dic['gmsh_path']} {dic['fol']}/mesh.geo -3 & wait")
 
 
@@ -616,7 +581,7 @@ def main():
 
 
 # {
-# Copyright 2022-2025, NORCE Norwegian Research Centre AS, Computational
+# Copyright 2022-2025, NORCE Research AS, Computational
 # Geosciences and Modelling.
 
 # This file is part of the pymm module.

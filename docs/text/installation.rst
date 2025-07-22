@@ -36,6 +36,11 @@ install the Python requirements in a virtual environment with the following comm
     # For contributions/testing/linting, install the dev-requirements
     pip install -r dev-requirements.txt
 
+.. note::
+
+    While with Python3.12 the previous lines should install all required Python packages with the correct versions, 
+    using Python3.13 requires to install a higher version of scikit-image, this by executing **pip install scikit-image==0.25.2** after the previous lines.
+
 .. tip::
 
     Typing **git tag -l** writes all available specific versions.
@@ -43,7 +48,13 @@ install the Python requirements in a virtual environment with the following comm
 OpenFOAM
 --------
 
-See the `OpenFOAM page <https://openfoam.org/download/12-ubuntu/>`_, where from OpenFOAM-12 the simulator is available via apt get.
+See the `OpenFOAM page <https://openfoam.org/download/13-ubuntu/>`_, where from OpenFOAM-12 the simulator is available via apt get,
+and OpenFOAM-13 is the latest release. To test if OpenFoam is installed and working, you could type in the terminal:
+
+.. code-block:: console
+
+    . /opt/openfoam13/etc/bashrc    
+    foamRun -help
 
 Gmsh
 ----
@@ -54,5 +65,4 @@ See the `Gmsh page <https://gmsh.info/#Download>`_.
 .. tip::
 
     See the `CI.yml <https://github.com/cssr-tools/pymm/blob/main/.github/workflows/CI.yml>`_ script 
-    for installation of pymm in Ubuntu using Python3.13. Using Python3.13 requires to install a higher version
-    of scikit-image by executing **pip install scikit-image==0.25.2**.
+    for installation of pymm in Ubuntu using Python3.13.
