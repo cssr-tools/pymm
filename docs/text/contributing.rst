@@ -29,7 +29,7 @@ Contribute to the software
     #. **pushd docs & make html** (this generates the documentation, and might rise issues that need to be fixed before the pull request; if the build succeeds and if the contribution changes the documentation, then copy all content from the docs/_build/html/ folder and replace the files in the `docs <https://github.com/cssr-tools/pymm/tree/main/docs>`_ folder)
     
     .. tip::
-        See the `CI.yml <https://github.com/cssr-tools/pymm/blob/main/.github/workflows/CI.yml>`_ script and the `Actions <https://github.com/cssr-tools/pymm/actions>`_ for installation of pymm, as well as the execution of the six previous steps in Ubuntu 24.10.
+        See the `CI.yml <https://github.com/cssr-tools/pymm/blob/main/.github/workflows/CI.yml>`_ script and the `Actions <https://github.com/cssr-tools/pymm/actions>`_ for installation of pymm, as well as the execution of the six previous steps in Ubuntu 24.04.
 
 #. Squash your commits into a single commit (see this `nice tutorial <https://gist.github.com/lpranam/4ae996b0a4bc37448dc80356efbca7fa>`_ if you are not familiar with this)
 #. Push your commit and make a pull request

@@ -163,7 +163,6 @@ def process_image(dic, in_image):
     # Save the binary image for visualization
     if not os.path.exists(f"{dic['fol']}"):
         os.system(f"mkdir {dic['fol']}")
-    ps.visualization.set_mpl_style()
     fig, axis = plt.subplots()
     axis.imshow(
         dic["im"][dic["ad_bord"] : -dic["ad_bord"], dic["ad_bord"] : -dic["ad_bord"]],

@@ -14,7 +14,7 @@ Creation of [_OpenFOAM_](https://www.openfoam.com) simulation models from given 
 ## Installation
 You will first need to install
 * OpenFOAM (https://www.openfoam.com) (tested with OpenFOAM-13)
-* Gmsh (https://gmsh.info) (tested with Gmsh 4.14.0)
+* Gmsh (https://gmsh.info) (tested with Gmsh 4.15.0)
 
 To install the _pymm_ executable from the development version: 
 
@@ -43,7 +43,7 @@ pip install -e .
 pip install -r dev-requirements.txt
 ```
 
-See the [_OpenFOAM page_](https://openfoam.org/download/13-ubuntu/), where from OpenFOAM-12 the simulator is available via apt get. 
+See the [_OpenFOAM page_](https://openfoam.org/download/13-ubuntu/), where from OpenFOAM-12 the simulator is available via apt get, and OpenFOAM-13 is the latest release. 
 
 ## Running pymm
 You can run _pymm_ as a single command line:

@@ -4,6 +4,8 @@ Installation
 
 The following steps work installing the dependencies in Linux via apt-get.
 While using package managers such as Anaconda, Miniforge, or Mamba might work, these are not tested.
+The supported Python versions are 3.12 and 3.13. We will update the documentation when Python3.14 is supported
+(e.g., the porespy Python package is not yet available via pip install in Python 3.14).
 
 Python package
 --------------
@@ -36,11 +38,6 @@ install the Python requirements in a virtual environment with the following comm
     # For contributions/testing/linting, install the dev-requirements
     pip install -r dev-requirements.txt
 
-.. note::
-
-    While with Python3.12 the previous lines should install all required Python packages with the correct versions, 
-    using Python3.13 requires to install a higher version of scikit-image, this by executing **pip install scikit-image==0.25.2** after the previous lines.
-
 .. tip::
 
     Typing **git tag -l** writes all available specific versions.
@@ -65,4 +62,4 @@ See the `Gmsh page <https://gmsh.info/#Download>`_.
 .. tip::
 
     See the `CI.yml <https://github.com/cssr-tools/pymm/blob/main/.github/workflows/CI.yml>`_ script 
-    for installation of pymm in Ubuntu using Python3.13.
+    for installation of pymm in Ubuntu using Python 3.13.
