@@ -22,10 +22,10 @@ classifiers = [
     "Operating System :: OS Independent"
 ]
 dependencies = [
-    "alive_progress",
-    "ipython",
-    "mako",
-    "porespy"
+    "alive_progress<=3.3.0",
+    "ipython<=9.6.0",
+    "mako<=1.3.10",
+    "porespy<=2.4.3"
 ]
 requires-python = ">=3.12"
 
