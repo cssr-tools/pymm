@@ -4,6 +4,8 @@ Installation
 
 The following steps work installing the dependencies in Linux via apt-get.
 While using package managers such as Anaconda, Miniforge, or Mamba might work, these are not tested.
+The supported Python versions are 3.12 and 3.13. We will update the documentation when Python3.14 is supported
+(e.g., the porespy Python package is not yet available via pip install in Python 3.14).
 
 Python package
 --------------
@@ -65,4 +67,4 @@ See the `Gmsh page <https://gmsh.info/#Download>`_.
 .. tip::
 
     See the `CI.yml <https://github.com/cssr-tools/pymm/blob/main/.github/workflows/CI.yml>`_ script 
-    for installation of pymm in Ubuntu using Python3.13.
+    for installation of pymm in Ubuntu using Python 3.13.

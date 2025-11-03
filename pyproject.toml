@@ -23,6 +23,7 @@ classifiers = [
 ]
 dependencies = [
     "alive_progress",
+    "ipython",
     "mako",
     "porespy"
 ]
