@@ -38,6 +38,11 @@ install the Python requirements in a virtual environment with the following comm
     # For contributions/testing/linting, install the dev-requirements
     pip install -r dev-requirements.txt
 
+.. note::
+
+    While with Python3.12 the previous lines should install all required Python packages with the correct versions, 
+    using Python3.13 requires to install a higher version of scikit-image, this by executing **pip install scikit-image==0.25.2** after the previous lines.
+
 .. tip::
 
     Typing **git tag -l** writes all available specific versions.
