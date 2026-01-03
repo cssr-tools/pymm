@@ -56,7 +56,7 @@ Run `pymm --help` to see all possible command line argument options. Inside the 
 See the [_examples_](https://cssr-tools.github.io/pymm/examples.html) in the [_documentation_](https://cssr-tools.github.io/pymm/introduction.html).
 
 ## Citing
-* Landa-Marbán, D. 2023. An open-source image-based framework for CFD in microsystems. https://doi.org/10.5281/zenodo.8430988.
+* Landa-Marbán, D. 2023. pymm: An open-source image-based framework for CFD in microsystems. https://doi.org/10.5281/zenodo.8430988.
 
 ## Journal papers using pymm
 The following is a list of journal papers in which _pymm_ is used:

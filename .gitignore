@@ -137,4 +137,4 @@ cssr
 debugging
 developing
 playground
-**/tests/configs/*/
+tests/output
