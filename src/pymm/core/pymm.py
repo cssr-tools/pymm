@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2022-2025 NORCE Research AS
+# SPDX-FileCopyrightText: 2022-2026 NORCE Research AS
 # SPDX-License-Identifier: GPL-3.0
 # pylint: disable=R0912,R0915,E1102,E1123
 
@@ -589,7 +589,7 @@ def main():
 
 
 # {
-# Copyright 2022-2025, NORCE Research AS, Computational
+# Copyright 2022-2026, NORCE Research AS, Computational
 # Geosciences and Modelling.
 
 # This file is part of the pymm module.

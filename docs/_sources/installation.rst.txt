@@ -4,8 +4,7 @@ Installation
 
 The following steps work installing the dependencies in Linux via apt-get.
 While using package managers such as Anaconda, Miniforge, or Mamba might work, these are not tested.
-The supported Python versions are 3.12 and 3.13. We will update the documentation when Python3.14 is supported
-(e.g., the porespy Python package is not yet available via pip install in Python 3.14).
+The supported Python versions are 3.12 and 3.13. We will update the documentation when Python3.14 is supported.
 
 Python package
 --------------
@@ -55,7 +54,7 @@ and OpenFOAM-13 is the latest release. To test if OpenFoam is installed and work
 
 .. code-block:: console
 
-    . /opt/openfoam13/etc/bashrc    
+    source /opt/openfoam13/etc/bashrc    
     foamRun -help
 
 Gmsh
@@ -67,4 +66,4 @@ See the `Gmsh page <https://gmsh.info/#Download>`_.
 .. tip::
 
     See the `CI.yml <https://github.com/cssr-tools/pymm/blob/main/.github/workflows/CI.yml>`_ script 
-    for installation of pymm in Ubuntu using Python 3.13.
+    for installation of pymm, gmsh, and OpenFOAM-13 in Ubuntu using Python 3.13.

@@ -4,9 +4,8 @@ authors:
 - family-names: Landa-Marbán
   given-names: David
   orcid: "https://orcid.org/0000-0002-3343-1005"
-title: "py-micp: An Open-Source Simulation Workflow for Field-Scale Application of
-  Microbially Induced Calcite Precipitation Technology for Leakage Remediation"
-version: "2025.10"
-year: 2025
+title: "pymm: An open-source image-based framework for CFD in microsystems"
+version: "2023.10"
+year: 2023
 doi: 10.5281/zenodo.8430988
 url: "https://github.com/cssr-tools/pymm"
