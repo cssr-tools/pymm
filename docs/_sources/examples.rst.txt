@@ -64,9 +64,9 @@ The configuration file was saved as 'configuration.toml' and contained the follo
     :linenos:
 
     #Set the pymm parameters
-    lenght = 600e-6       #Image-related, length of the microsystem [m]
+    length = 600e-6       #Image-related, length of the microsystem [m]
     width = 600e-6        #Image-related, height of the microsystem [m]
-    tickness = 1.8e-6     #Image-related, depth of the microsystem [m]
+    thickness = 1.8e-6    #Image-related, depth of the microsystem [m]
     grainMeaning = 1      #Image-related, 0 if the grains in the image are light colors (e.g., white) or 1 for dark colors (e.g., black)
     threshold = 0.5       #Image-related, threshold for converting the image to binary
     rescale = 1           #Image-related, rescaled factor for the input image
@@ -76,7 +76,7 @@ The configuration file was saved as 'configuration.toml' and contained the follo
     lineWidth = 1         #Figure-related, line width to show the contours in the produced figures
     channelWidth = 6e-6   #Device-related, width of the top and bottom channels in the micromodel device [m]
     meshSize = 1e-6       #Mesh-related, mesh size [m]
-    viscocity = 1e-6      #Fluid-related, kinematic viscosity [dynamic viscosity/fluid_density, m2/s]
+    viscosity = 1e-6      #Fluid-related, kinematic viscosity [dynamic viscosity/fluid_density, m2/s]
     diffusion = 1e-12     #Fluid-related, diffusion coefficient for tracer [m2/s]
     inletLocation = "top" #Simulation-related, inlet bc location (left, top, right, or bottom)
     inletValue = 2.0e-3   #Simulation-related, inlet boundary condition (pressure/fluid_density, [Pa/(kg/m3)])

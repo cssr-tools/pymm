@@ -19,9 +19,9 @@ The current implementation allows for the following input parameters:
     :linenos:
 
     #Set the pymm parameters
-    lenght = 6.74e-3      #Image-related, length of the microsystem [m]
+    length = 6.74e-3      #Image-related, length of the microsystem [m]
     width = 2.5e-3        #Image-related, height of the microsystem [m]
-    tickness = 0.03e-3    #Image-related, depth of the microsystem [m]
+    thickness = 0.03e-3   #Image-related, depth of the microsystem [m]
     grainMeaning = 1      #Image-related, 0 if the grains in the image are light colors (e.g., white) or 1 for dark colors (e.g., black)
     threshold = 0.5       #Image-related, threshold for converting the image to binary
     rescale = 1           #Image-related, rescaled factor for the input image
@@ -31,7 +31,7 @@ The current implementation allows for the following input parameters:
     lineWidth = 1         #Figure-related, line width to show the contours in the produced figures
     channelWidth = 0.2e-3 #Device-related, width of the top and bottom channels in the micromodel device [m]
     meshSize = 8e-6       #Mesh-related, mesh size [m]
-    viscocity = 1e-6      #Fluid-related, kinematic viscosity [dynamic viscosity/fluid_density, m2/s]
+    viscosity = 1e-6      #Fluid-related, kinematic viscosity [dynamic viscosity/fluid_density, m2/s]
     diffusion = 1e-12     #Fluid-related, diffusion coefficient for the tracer [m2/s]
     inletLocation = "top" #Simulation-related, inlet bc location (left, top, right, or bottom)
     inletValue = 5.0e-4   #Simulation-related, inlet bc value (pressure/fluid_density, [Pa/(kg/m3)])
@@ -52,7 +52,7 @@ value to convert the image to binary, which is internally converted to gray scal
 of pixels of the image (valid values between 0 and 1, see 
 `skimage.transform.rescale <https://scikit-image.org/docs/stable/api/skimage.transform.html#skimage.transform.rescale>`_). 
 The minimum size of the grain clusters controls the number of pixels to consider for the internal grains (valid values are
-greater than 0, see `porespy.filters.trim\_small\_clusters <https://porespy.org/modules/generated/porespy.filters.trim\_small\_clusters.html>`_ ). 
+greater than 0, see `skimage.morphology.remove\_small\_objects <https://scikit-image.org/docs/stable/api/skimage.morphology.html#skimage.morphology.remove\_small\_objects.html>`_ ). 
 The two following parameters, for setting the tolerance to approximate the contours of polygons, reduce the number of points in the extracted border 
 and internal grains respectively (valid values are 0 or greater than 0, see `skimage.measure.approximate\_polygon <https://scikit-image.org/docs/stable/auto\_examples/edges/plot\_polygon.html>`_ ). 
 The following figure shows the internal grains and border for three decreasing values of the minimum size cluster and tolerances.

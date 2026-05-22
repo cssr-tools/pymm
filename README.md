@@ -1,5 +1,5 @@
 [![Build Status](https://github.com/cssr-tools/pymm/actions/workflows/CI.yml/badge.svg)](https://github.com/cssr-tools/pymm/actions/workflows/CI.yml)
-<a href="https://www.python.org/"><img src="https://img.shields.io/badge/python-3.12%20to%203.13-blue.svg"></a>
+<a href="https://www.python.org/"><img src="https://img.shields.io/badge/python-3.12%20to%203.14-blue.svg"></a>
 [![Code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8430989.svg)](https://doi.org/10.5281/zenodo.8430989)
@@ -14,7 +14,7 @@ Creation of [_OpenFOAM_](https://www.openfoam.com) simulation models from given 
 ## Installation
 You will first need to install
 * OpenFOAM (https://www.openfoam.com) (tested with OpenFOAM-13)
-* Gmsh (https://gmsh.info) (tested with Gmsh 4.15.0)
+* Gmsh (https://gmsh.info) (tested with Gmsh 4.15.2)
 
 To install the _pymm_ executable from the development version: 
 
@@ -22,15 +22,15 @@ To install the _pymm_ executable from the development version:
 pip install git+https://github.com/cssr-tools/pymm.git
 ```
 
-If you are interested in a specific version (e.g., v2025.10) or in modifying the source code, then you can clone the repository and install the Python requirements in a virtual environment with the following commands:
+If you are interested in a specific version (e.g., v2026.04) or in modifying the source code, then you can clone the repository and install the Python requirements in a virtual environment with the following commands:
 
 ```bash
 # Clone the repo
 git clone https://github.com/cssr-tools/pymm.git
 # Get inside the folder
 cd pymm
-# For a specific version (e.g., v2025.10), or skip this step (i.e., edge version)
-git checkout v2025.10
+# For a specific version (e.g., v2026.04), or skip this step (i.e., edge version)
+git checkout v2026.04
 # Create virtual environment (to specific Python, python3.12 -m venv vpycopm)
 python3 -m venv vpymm
 # Activate virtual environment

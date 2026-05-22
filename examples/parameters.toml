@@ -1,7 +1,7 @@
 #Set the pymm parameters
-lenght = 6.74e-3      #Image-related, length of the microsystem [m]
+length = 6.74e-3      #Image-related, length of the microsystem [m]
 width = 2.5e-3        #Image-related, height of the microsystem [m]
-tickness = 0.03e-3    #Image-related, depth of the microsystem [m]
+thickness = 0.03e-3   #Image-related, depth of the microsystem [m]
 grainMeaning = 1      #Image-related, 0 if the grains in the image are light colors (e.g., white) or 1 for dark colors (e.g., black)
 threshold = 0.5       #Image-related, threshold for converting the image to binary
 rescale = 1           #Image-related, rescaled factor for the input image
@@ -11,7 +11,7 @@ grainsTol = 0         #Image-related, tolerance to approximate the grains as pol
 lineWidth = 1         #Figure-related, line width to show the contours in the produced figures
 channelWidth = 0.2e-3 #Device-related, width of the top and bottom channels in the micromodel device [m]
 meshSize = 8e-6       #Mesh-related, mesh size [m]
-viscocity = 1e-6      #Fluid-related, kinematic viscosity [dynamic viscosity/fluid_density, m2/s]
+viscosity = 1e-6      #Fluid-related, kinematic viscosity [dynamic viscosity/fluid_density, m2/s]
 diffusion = 1e-12     #Fluid-related, diffusion coefficient for the tracer [m2/s]
 inletLocation = "top" #Simulation-related, inlet bc location (left, top, right, or bottom)
 inletValue = 5.0e-4   #Simulation-related, inlet bc value (pressure/fluid_density, [Pa/(kg/m3)])

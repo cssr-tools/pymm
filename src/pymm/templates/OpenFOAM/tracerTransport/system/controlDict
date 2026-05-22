@@ -16,21 +16,25 @@ FoamFile
 
 application     foamRun;
 
-solver          incompressibleFluid;
+solver          functions;
 
-startFrom       startTime;
+subSolver       incompressibleFluid;
+
+startFrom       latestTime;
 
 startTime       0;
 
+subSolverTime   0;
+
 stopAt          endTime;
 
-endTime         ${dic['iterationsMax']};
+endTime         @tracerTime@;
 
-deltaT          1;
+deltaT          @tracerStep@;
 
-writeControl    timeStep;
+writeControl    runTime;
 
-writeInterval   ${dic['iterationsMax']};
+writeInterval   @tracerWrite@;
 
 purgeWrite      0;
 
@@ -45,5 +49,10 @@ timeFormat      general;
 timePrecision   6;
 
 runTimeModifiable true;
+
+functions
+{
+    #includeFunc scalarTransport(T, diffusivity=constant, D = @diffusion@)
+}
 
 // ************************************************************************* //

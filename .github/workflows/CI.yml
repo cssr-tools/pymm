@@ -16,10 +16,10 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Set up Python 3.13
+    - name: Set up Python 3.14
       uses: actions/setup-python@v2
       with:
-        python-version: 3.13
+        python-version: 3.14
 
     - name: Install OpenFOAM
       run: |
@@ -41,12 +41,12 @@ jobs:
     - name: Install pymm
       run: |
         pip install .
-        pip install scikit-image==0.25.2
 
     - name: Check code style and linting 
       run: |
-        black --check src/ tests/
+        black --target-version py312 --check src/ tests/
         pylint src/ tests/
+        ruff check src/ tests/
         mypy --ignore-missing-imports src/ tests/
       
     - name: Run the tests
@@ -54,7 +54,7 @@ jobs:
         set +e
         source /opt/openfoam13/etc/bashrc
         set -e
-        pytest --cov=pymm --cov-report term-missing tests/
+        pytest --cov=pymm --exitfirst --cov-report term-missing --basetemp=test_outputs tests/
 
     - name: Build documentation
       run: |
