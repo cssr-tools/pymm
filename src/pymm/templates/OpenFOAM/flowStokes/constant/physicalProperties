@@ -8,36 +8,14 @@
 FoamFile
 {
     format      ascii;
-    class       volScalarField;
-    object      p;
+    class       dictionary;
+    location    "constant";
+    object      physicalProperties;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 2 -2 0 0 0 0];
+viscosityModel  constant;
 
-internalField   uniform 0;
-
-boundaryField
-{
-    abovenbelow
-    {
-        type            empty;
-    }
-    inlet
-    {
-        type            fixedValue;
-        value           uniform ${dic['inletValue']};   
-    }
-    outlet
-    {
-        type            fixedValue;
-        value           uniform 0;   
-    }
-    defaultFaces
-    {
-        type            zeroGradient;
-    }
-}
-
+nu              [0 2 -1 0 0 0 0] @viscosity@;
 
 // ************************************************************************* //

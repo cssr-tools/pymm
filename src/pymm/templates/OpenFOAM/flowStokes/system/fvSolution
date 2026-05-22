@@ -10,49 +10,47 @@ FoamFile
     format      ascii;
     class       dictionary;
     location    "system";
-    object      controlDict;
+    object      fvSolution;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-application     foamRun;
-
-solver          functions;
-
-subSolver       incompressibleFluid;
-
-startFrom       latestTime;
-
-startTime       0;
-
-subSolverTime   0;
-
-stopAt          endTime;
-
-endTime         ${dic['tracerTime']};
-
-deltaT          ${dic['tracerStep']};
-
-writeControl    runTime;
-
-writeInterval   ${dic['tracerWrite']};
-
-purgeWrite      0;
-
-writeFormat     ascii;
-
-writePrecision  6;
-
-writeCompression off;
-
-timeFormat      general;
-
-timePrecision   6;
-
-runTimeModifiable true;
-
-functions
+solvers
 {
-    #includeFunc scalarTransport(T, diffusivity=constant, D = ${dic['diffusion']})
+    p
+    {
+        solver          GAMG;
+        tolerance       1e-8;
+        relTol          0.1;
+        smoother        GaussSeidel;
+    }
+
+    U
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-9;
+        relTol          0.1;
+    }
 }
+
+SIMPLE
+{
+    nNonOrthogonalCorrectors 1;
+    consistent  yes;
+    residualControl
+    {
+        p               @pressureConv@;
+        U               @velocityConv@;
+    }
+}
+
+relaxationFactors
+{
+    equations
+    {
+        U               0.9; 
+    }
+}
+
 
 // ************************************************************************* //

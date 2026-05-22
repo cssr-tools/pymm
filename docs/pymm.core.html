@@ -8,14 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>pymm.core package &mdash; pymm  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -89,15 +89,40 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="pymm.core.pymm.html">pymm.core.pymm module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.boundary_tags_left_bottom"><code class="docutils literal notranslate"><span class="pre">boundary_tags_left_bottom()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.boundary_tags_right_top"><code class="docutils literal notranslate"><span class="pre">boundary_tags_right_top()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig"><code class="docutils literal notranslate"><span class="pre">PymmConfig</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.borderTol"><code class="docutils literal notranslate"><span class="pre">PymmConfig.borderTol</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.channelWidth"><code class="docutils literal notranslate"><span class="pre">PymmConfig.channelWidth</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.diffusion"><code class="docutils literal notranslate"><span class="pre">PymmConfig.diffusion</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.grainMeaning"><code class="docutils literal notranslate"><span class="pre">PymmConfig.grainMeaning</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.grainsSize"><code class="docutils literal notranslate"><span class="pre">PymmConfig.grainsSize</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.grainsTol"><code class="docutils literal notranslate"><span class="pre">PymmConfig.grainsTol</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.inletLocation"><code class="docutils literal notranslate"><span class="pre">PymmConfig.inletLocation</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.inletValue"><code class="docutils literal notranslate"><span class="pre">PymmConfig.inletValue</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.iterationsMax"><code class="docutils literal notranslate"><span class="pre">PymmConfig.iterationsMax</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.length"><code class="docutils literal notranslate"><span class="pre">PymmConfig.length</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.lineWidth"><code class="docutils literal notranslate"><span class="pre">PymmConfig.lineWidth</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.meshSize"><code class="docutils literal notranslate"><span class="pre">PymmConfig.meshSize</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.pressureConv"><code class="docutils literal notranslate"><span class="pre">PymmConfig.pressureConv</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.rescale"><code class="docutils literal notranslate"><span class="pre">PymmConfig.rescale</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.thickness"><code class="docutils literal notranslate"><span class="pre">PymmConfig.thickness</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.threshold"><code class="docutils literal notranslate"><span class="pre">PymmConfig.threshold</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.tracerStep"><code class="docutils literal notranslate"><span class="pre">PymmConfig.tracerStep</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.tracerTime"><code class="docutils literal notranslate"><span class="pre">PymmConfig.tracerTime</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.tracerWrite"><code class="docutils literal notranslate"><span class="pre">PymmConfig.tracerWrite</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.velocityConv"><code class="docutils literal notranslate"><span class="pre">PymmConfig.velocityConv</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.viscosity"><code class="docutils literal notranslate"><span class="pre">PymmConfig.viscosity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.PymmConfig.width"><code class="docutils literal notranslate"><span class="pre">PymmConfig.width</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm._assign_boundary"><code class="docutils literal notranslate"><span class="pre">_assign_boundary()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.boundary_tags_left_top"><code class="docutils literal notranslate"><span class="pre">boundary_tags_left_top()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.boundary_tags_right_bottom"><code class="docutils literal notranslate"><span class="pre">boundary_tags_right_bottom()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.copy_and_replace"><code class="docutils literal notranslate"><span class="pre">copy_and_replace()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.extract_borders"><code class="docutils literal notranslate"><span class="pre">extract_borders()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.identify_cells"><code class="docutils literal notranslate"><span class="pre">identify_cells()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.make_figures"><code class="docutils literal notranslate"><span class="pre">make_figures()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.pad_with"><code class="docutils literal notranslate"><span class="pre">pad_with()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.process_image"><code class="docutils literal notranslate"><span class="pre">process_image()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.pymm"><code class="docutils literal notranslate"><span class="pre">pymm()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.run_stokes"><code class="docutils literal notranslate"><span class="pre">run_stokes()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.run_tracer"><code class="docutils literal notranslate"><span class="pre">run_tracer()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="pymm.core.pymm.html#pymm.core.pymm.write_geo"><code class="docutils literal notranslate"><span class="pre">write_geo()</span></code></a></li>

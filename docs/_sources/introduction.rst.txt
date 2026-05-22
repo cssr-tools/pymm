@@ -9,8 +9,7 @@ This documentation describes the **pymm** tool hosted in `https://github.com/css
 Description
 -----------
 
-The **pymm** tool relies on Python packages (e.g., `porespy <https://porespy.org>`_ and 
-`skimage <https://scikit-image.org>`_) to generate the spatial domains for the simulations from
+The **pymm** tool relies on Python packages (e.g., `skimage <https://scikit-image.org>`_) to generate the spatial domains for the simulations from
 the microsystem images, and `Gmsh <https://gmsh.info>`_ as a mesh generator. 
 The numerical simulations for the water flow and tracer are performed using 
 the `OpenFOAM <https://www.openfoam.com>`_ simulator. This framework could be applied to general images and 

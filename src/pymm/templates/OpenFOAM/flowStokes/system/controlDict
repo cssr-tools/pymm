@@ -9,13 +9,41 @@ FoamFile
 {
     format      ascii;
     class       dictionary;
-    location    "constant";
-    object      physicalProperties;
+    location    "system";
+    object      controlDict;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-viscosityModel  constant;
+application     foamRun;
 
-nu              [0 2 -1 0 0 0 0] ${dic['viscocity']};
+solver          incompressibleFluid;
+
+startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         @iterationsMax@;
+
+deltaT          1;
+
+writeControl    timeStep;
+
+writeInterval   @iterationsMax@;
+
+purgeWrite      0;
+
+writeFormat     ascii;
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
 
 // ************************************************************************* //

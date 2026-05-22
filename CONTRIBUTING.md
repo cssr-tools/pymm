@@ -13,10 +13,11 @@ Contributions are more than welcome using the fork and pull request approach ðŸ™
 1. Work on your own fork of the main repo
 1. In the main repo execute:
     1. **pip install -r dev-requirements.txt** (this installs the [_dev-requirements.txt_](https://github.com/cssr-tools/pymm/blob/main/dev-requirements.txt))
-    1. **black src/ tests/** (this formats the code)
+    1. **black --target-version py312 src/ tests/** (this formats the code)
     1. **pylint src/ tests/** (this analyses the code, and might rise issues that need to be fixed before the pull request)
+    1. **ruff check src/ tests/** (this also analyses the code, and might rise issues that need to be fixed before the pull request)
     1. **mypy --ignore-missing-imports src/ tests/** (this is a static checker, and might rise issues that need to be fixed before the pull request)
-    1. **pytest --cov=pymm --cov-report term-missing tests/** (this runs locally the tests, and might rise issues that need to be fixed before the pull request)
+    1. **pytest --cov=pymm --cov-report term-missing tests/ -n auto** (this runs locally the tests, and might rise issues that need to be fixed before the pull request)
     1. **pushd docs & make html** (this generates the documentation, and might rise issues that need to be fixed before the pull request; if the build succeeds and if the contribution changes the documentation, then copy all content from the docs/_build/html/ folder and replace the files in the [_docs_](https://github.com/cssr-tools/pymm/tree/main/docs) folder)
     * Tip: See the [_CI.yml_](https://github.com/cssr-tools/pymm/blob/main/.github/workflows/CI.yml) script and the [_Actions_](https://github.com/cssr-tools/pymm/actions) for installation of _pymm_, as well as the execution of the six previous steps in Ubuntu 24.04 using Python 3.12.
 1. Squash your commits into a single commit (see this [_nice tutorial_](https://gist.github.com/lpranam/4ae996b0a4bc37448dc80356efbca7fa) if you are not familiar with this)
